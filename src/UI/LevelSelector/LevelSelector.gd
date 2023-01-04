@@ -24,4 +24,4 @@ func _ready():
 #	pass
 
 func BackButtonClick():
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	get_tree().change_scene("res://src/UI/MainMenu/MainMenu.tscn")
