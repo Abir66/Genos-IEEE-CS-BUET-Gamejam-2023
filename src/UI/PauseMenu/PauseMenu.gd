@@ -21,7 +21,7 @@ func _ready():
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		self.paused = !paused
-
+			
 func ResumeButtonClick():
 	paused = false
 	scene_tree.paused = false
