@@ -40,4 +40,4 @@ func RestartButtonClick():
 func ExitButtonClick():
 	paused = false
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	get_tree().change_scene("res://src/UI/MainMenu/MainMenu.tscn")

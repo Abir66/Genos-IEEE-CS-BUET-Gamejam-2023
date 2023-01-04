@@ -20,7 +20,7 @@ func _ready():
 #	pass
 
 func StartButtonClick():
-	get_tree().change_scene("res://scenes/LevelSelector.tscn")
+	get_tree().change_scene("res://src/UI/LevelSelector/LevelSelector.tscn")
 
 func ExitButtonClick():
 	get_tree().quit()

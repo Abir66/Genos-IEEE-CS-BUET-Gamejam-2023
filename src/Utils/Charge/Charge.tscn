@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/fonts/UITitleFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/Utils/Charge/Charge.gd" type="Script" id=2]
+
+[node name="Charge" type="Label"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -270.0
+margin_top = 21.0
+margin_right = -24.0
+margin_bottom = 112.0
+custom_fonts/font = ExtResource( 1 )
+text = "Charge: %s
+"
+script = ExtResource( 2 )
