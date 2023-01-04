@@ -25,9 +25,6 @@ margin_right = -53.0
 margin_bottom = -50.0
 texture = ExtResource( 1 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0

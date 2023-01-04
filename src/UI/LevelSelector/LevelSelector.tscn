@@ -13,9 +13,6 @@ script = ExtResource( 3 )
 [node name="LevelSelectorPanel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="LevelSelectorPanel"]
 anchor_right = 1.0
@@ -48,8 +45,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelButton" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+[node name="LevelButton1" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_right = 243.0
 next_scene_path = "res://src/Levels/Level01/Scene.tscn"
+
+[node name="LevelButton2" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_left = 247.0
+margin_right = 490.0
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+
+[node name="LevelButton3" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_left = 494.0
+margin_right = 737.0
+
+[node name="LevelButton4" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_left = 741.0
+margin_right = 984.0
+
+[node name="LevelButton5" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_top = 204.0
+margin_right = 243.0
+margin_bottom = 404.0
+
+[node name="LevelButton6" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_left = 247.0
+margin_top = 204.0
+margin_right = 490.0
+margin_bottom = 404.0
+
+[node name="LevelButton7" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_left = 494.0
+margin_top = 204.0
+margin_right = 737.0
+margin_bottom = 404.0
+
+[node name="LevelButton8" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
+margin_left = 741.0
+margin_top = 204.0
+margin_right = 984.0
+margin_bottom = 404.0
 
 [node name="BackButton" type="Button" parent="LevelSelectorPanel"]
 anchor_top = 1.0
@@ -60,6 +94,3 @@ margin_right = 85.0
 margin_bottom = -20.0
 custom_fonts/font = ExtResource( 4 )
 text = "Back"
-__meta__ = {
-"_edit_use_anchors_": false
-}
