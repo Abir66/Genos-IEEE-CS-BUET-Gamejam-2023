@@ -11,6 +11,7 @@ export var maximum_jumps = 2
 export var gravity = 4500
 export var max_fall_speed = 10000
 
+export var deathParticle : PackedScene
 
 var jumps_made = 0
 var velocity = Vector2.ZERO
@@ -24,12 +25,13 @@ var is_idling = false
 var is_running = false
 var is_grounded = false
 var facing = "right"
+var is_alive = false
 
 
 func _ready():
 	$IdleCollision.disabled = false
 	$JumpCollision.disabled = true
-
+	is_alive = true
 
 func _physics_process(delta):
 	
@@ -117,3 +119,20 @@ func animiation():
 		$AnimatedSprite.play("Idle")
 		
 
+func kill(wait_time = 2.0):
+	
+	if not is_alive : return
+	
+	is_alive = false
+	
+	var _particle = deathParticle.instance()
+	_particle.position = global_position
+	_particle.rotation = global_rotation
+	_particle.emitting = true
+	
+	get_tree().current_scene.add_child(_particle)
+	self.visible = false
+
+	yield(get_tree().create_timer(wait_time), "timeout")
+	_particle.queue_free()
+	queue_free()
