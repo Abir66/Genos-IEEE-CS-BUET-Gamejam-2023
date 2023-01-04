@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.522581, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0284091 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 0.5
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 400.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 20.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="Environment" id=6]
+background_mode = 4
+tonemap_mode = 4
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/6 = true
+glow_levels/7 = true
+glow_blend_mode = 1
+glow_bicubic_upscale = true
+glow_high_quality = true
+
+[node name="Particles2D" type="Particles2D"]
+self_modulate = Color( 1.33, 1.33, 1.01, 1 )
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 5 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )
