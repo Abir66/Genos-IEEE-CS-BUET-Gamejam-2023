@@ -35,13 +35,22 @@ func _ready():
 	
 
 func _physics_process(delta: float) -> void:
+	
+	var collision_with_player = false
+	
 	_velocity.y += gravity * delta 
 	var right_limit = init_location.x+right_range
 	var left_limit = init_location.x-left_range
 	if is_on_wall():
-		_velocity.x *= -1.0
-		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
-		right_going = not right_going
+		
+		print(self.get_last_slide_collision().collider.name)
+		if not self.get_last_slide_collision().collider.name == "Player":
+			_velocity.x *= -1.0
+			$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
+			right_going = not right_going	
+			
+		else : collision_with_player = true
+			
 	elif self.position.x >= right_limit:
 		_velocity.x *= -1.0
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
@@ -50,7 +59,12 @@ func _physics_process(delta: float) -> void:
 		_velocity.x *= -1.0
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 		right_going = true
-	_velocity.y = move_and_slide(_velocity,FLOOR_NORMAL).y
+	
+		
+	if collision_with_player:	
+		_velocity.y = move_and_slide(_velocity,FLOOR_NORMAL, false, 0).y
+	else :
+		_velocity.y = move_and_slide(_velocity,FLOOR_NORMAL).y
 	
 func _process(delta):
 	if right_going: $Laser.set_facing("right")

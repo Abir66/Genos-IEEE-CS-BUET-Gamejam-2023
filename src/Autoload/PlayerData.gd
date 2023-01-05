@@ -9,7 +9,8 @@ var deaths: = 0 setget set_deaths
 var damage1: = .01
 
 func Die():
-	print("die")
+	#print("die")
+	pass
 
 func reset():
 	self.charge = 0

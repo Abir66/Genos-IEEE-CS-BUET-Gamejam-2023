@@ -105,6 +105,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ShotTest"):
 		$Laser2.shoot_laser(facing)
 		is_shooting_laser = true
+		shake_camera(0.5, 15, 30, 0)
 	
 	if Input.is_action_just_released("ShotTest"):
 		$Laser2.stop_laser()
