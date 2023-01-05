@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/prototype/prototype_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PrefabScenes/Ground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PrefabScenes/BadTouch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://PrefabScenes/BadGround.tscn" type="PackedScene" id=5]
+[ext_resource path="res://PrefabScenes/LevelCompleteTouch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://PrefabScenes/LevelManager.tscn" type="PackedScene" id=7]
+
+[node name="level_root" type="Node2D"]
+
+[node name="level_manager" parent="." instance=ExtResource( 7 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262164, 0, 0, 262165, 0, 0, 262166, 0, 0, 262167, 0, 0, 262168, 0, 0, 262174, 0, 0, 262175, 0, 0, 262176, 0, 0, 262177, 0, 0, 262178, 0, 0, 262179, 0, 0, 262180, 0, 0, 327691, 0, 0, 327695, 0, 0, 327700, 0, 0, 327701, 0, 0, 327702, 0, 0, 327703, 0, 0, 327704, 0, 0, 327710, 0, 0, 393227, 0, 0, 393231, 0, 0, 393236, 0, 0, 393237, 0, 0, 393238, 0, 0, 393239, 0, 0, 393240, 0, 0, 393246, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458771, 0, 0, 458772, 0, 0, 458773, 0, 0, 458774, 0, 0, 458775, 0, 0, 458776, 0, 0, 458777, 0, 0, 458778, 0, 0, 458779, 0, 0, 458780, 0, 0, 458781, 0, 0, 458782, 0, 0, 458783, 0, 0, 458784, 0, 0, 458785, 0, 0, 458786, 0, 0, 458787, 0, 0, 458788, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 145.498, 344.389 )
+
+[node name="grounds" type="Node2D" parent="."]
+
+[node name="ground1" parent="grounds" instance=ExtResource( 3 )]
+position = Vector2( 160, 480 )
+scale = Vector2( 16, 3 )
+
+[node name="ground2" parent="grounds" instance=ExtResource( 3 )]
+position = Vector2( 415, 544 )
+scale = Vector2( 9.5, 3 )
+
+[node name="ground3" parent="grounds" instance=ExtResource( 3 )]
+position = Vector2( 1120, 544 )
+scale = Vector2( 9.5, 3 )
+
+[node name="ground4" parent="grounds" instance=ExtResource( 3 )]
+position = Vector2( 768, 480 )
+scale = Vector2( 25.5, 3 )
+
+[node name="ground5" parent="grounds" instance=ExtResource( 3 )]
+position = Vector2( 1792, 480 )
+scale = Vector2( 57.5, 3 )
+
+[node name="ground6" parent="grounds" instance=ExtResource( 3 )]
+position = Vector2( 1440, 290 )
+scale = Vector2( 16, 3 )
+
+[node name="bad_touches" type="Node2D" parent="."]
+
+[node name="bad_ground" parent="bad_touches" instance=ExtResource( 5 )]
+position = Vector2( 864, 290 )
+scale = Vector2( 16, 3 )
+
+[node name="bad_ground2" parent="bad_touches" instance=ExtResource( 5 )]
+position = Vector2( 2144, 290 )
+scale = Vector2( 22, 3 )
+
+[node name="bad_touch" parent="bad_touches" instance=ExtResource( 4 )]
+position = Vector2( 1439, 384 )
+scale = Vector2( 15.8, 6.1 )
+
+[node name="level_complete_touch" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2376, 383.578 )
+scale = Vector2( 1, 6.316 )
