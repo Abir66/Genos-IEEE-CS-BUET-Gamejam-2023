@@ -1,60 +1,95 @@
 extends RayCast2D
 
 
-var is_casting = false setget set_is_casting
-
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+var is_casting := false setget set_is_casting
+var isShot= false
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	set_physics_process(false)
-	$Line2D.points[1] = Vector2.ZERO
+	$Line2D.points[1]=Vector2.ZERO
 	
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		self.is_casting = event.pressed
+	
 
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Input.is_action_just_pressed("ShotTest") and is_casting==false :
+		self.is_casting = true
+		$Timer.start(1)
+		
+	if Input.is_action_just_released("ShotTest") and is_casting==true:
+		self.is_casting = false
+		$Timer.stop()
+	
 
+#$beamParticle.process_material.emission_box_extents.x=castPoint.length()*0.5
+	
+
+#func _unhandled_input(event: InputEvent)->void:
+#	if event is InputEventMouseButton:
+#		self.is_casting = not is_casting
+
+#func _unhandled_key_input(event):
+	#if event is InputEventKey:
+		#self.set_is_casting(event.pressed)
+	
 func _physics_process(delta):
-	var cast_point = cast_to
-	force_raycast_update()
 	
-	$CollisionParticles2D.emitting = is_colliding()
+#	if Input.is_mouse_button_pressed(1):
+#		self.is_casting = not is_casting
+	
+	var cast_point=cast_to
+	
+	force_raycast_update()
+	$collisionParticle.emitting=is_colliding()
 	
 	if is_colliding():
-		cast_point = to_local(get_collision_point())
-		$CollisionParticles2D.global_rotation = get_collision_normal().angle()
-		$CollisionParticles2D.position = cast_point
-		
-	$Line2D.points[1] = cast_point
-	$BeamParticles2D.position = cast_point * 0.5
-	$BeamParticles2D.process_material.emission_box_extents.x = cast_point.length() * 0.5
+		print(get_collision_point())
+		cast_point=to_local(get_collision_point())
+		$collisionParticle.global_rotation=get_collision_normal().angle()
+		$collisionParticle.position=cast_point
+	$Line2D.points[1]=cast_point
+	$beamParticle.position=cast_point*0.5
+	$beamParticle.process_material.emission_box_extents.x=cast_point.length()*0.5
+	print($collisionParticle.position)
 	
 	
 	
-func set_is_casting(cast):
-	is_casting = cast
 	
-	$BeamParticles2D.emitting = is_casting
-	$CastingParticles2D.emitting = is_casting
-	if is_casting:
+	
+func set_is_casting(cast: bool)->void:
+	
+	is_casting= cast
+	
+	$beamParticle.emitting=is_casting
+	$CastingParticle.emitting=is_casting
+	$Line2D/Light2D.enabled=is_casting
+	if is_casting: 
 		appear()
 	else:
-		$CollisionParticles2D.emitting = false
-		dissapear()
-	
-	
+		$collisionParticle.emitting=false
+		disappear()
+		
 	set_physics_process(is_casting)
 	
 
-func appear():
+
+func appear() -> void:
 	$Tween.stop_all()
-	$Tween.interpolate_property($Line2D, "Width", 0, 10.0, 0.2)
-	$Tween.start()
-	
-func dissapear():
-	$Tween.stop_all()
-	$Tween.interpolate_property($Line2D, "Width", 10.0, 0, 0.1)
+	$Tween.interpolate_property($Line2D,"width",0,7.0,0.2)
 	$Tween.start()
 	
 	
+func disappear()->void:
+	$Tween.stop_all()
+	$Tween.interpolate_property($Line2D,"width",7.0,0,0.2)
+	$Tween.start()
 	
 	
+
+
+func _on_Timer_timeout():
+	self.set_is_casting(false)
