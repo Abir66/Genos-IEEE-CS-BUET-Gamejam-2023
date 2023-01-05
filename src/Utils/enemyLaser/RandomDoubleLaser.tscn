@@ -1,101 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://src/Utils/Laser/Laser.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Utils/Laser/DoubleLaser.gd" type="Script" id=2]
-
-[sub_resource type="Gradient" id=6]
-offsets = PoolRealArray( 0.69281, 0.888889, 1 )
-colors = PoolColorArray( 0.923875, 0.923875, 0.923875, 0.792388, 0.870588, 0.870588, 0.870588, 0.647059, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
-
-[sub_resource type="Curve" id=8]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0011363 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
-
-[sub_resource type="ParticlesMaterial" id=10]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 120.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 4.0
-scale = 0.68
-scale_curve = SubResource( 9 )
-color = Color( 0.0666667, 0.823529, 0.937255, 1 )
-color_ramp = SubResource( 7 )
-
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=2]
-curve = SubResource( 1 )
-
-[sub_resource type="ParticlesMaterial" id=11]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 100.0
-scale_curve = SubResource( 2 )
-color = Color( 0.0666667, 0.823529, 0.937255, 1 )
-
-[sub_resource type="Gradient" id=13]
-offsets = PoolRealArray( 0.69281, 0.888889, 1 )
-colors = PoolColorArray( 0.923875, 0.923875, 0.923875, 0.792388, 0.870588, 0.870588, 0.870588, 0.647059, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=14]
-gradient = SubResource( 13 )
-
-[sub_resource type="Curve" id=15]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0011363 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=16]
-curve = SubResource( 15 )
-
-[sub_resource type="ParticlesMaterial" id=17]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 120.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 4.0
-scale = 0.68
-scale_curve = SubResource( 16 )
-color = Color( 0.0666667, 0.823529, 0.937255, 1 )
-color_ramp = SubResource( 14 )
-
-[sub_resource type="Curve" id=18]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=19]
-curve = SubResource( 18 )
-
-[sub_resource type="ParticlesMaterial" id=20]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 100.0
-scale_curve = SubResource( 19 )
-color = Color( 0.0666667, 0.823529, 0.937255, 1 )
+[ext_resource path="res://src/Utils/enemyLaser/RandomLaser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Utils/enemyLaser/RandomDoubleLaser.gd" type="Script" id=2]
 
 [sub_resource type="Environment" id=12]
 background_mode = 4
@@ -114,48 +20,145 @@ glow_hdr_scale = 0.82
 glow_bicubic_upscale = true
 adjustment_enabled = true
 
-[node name="playerLaser" type="Node2D"]
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.69281, 0.888889, 1 )
+colors = PoolColorArray( 0.923875, 0.923875, 0.923875, 0.792388, 0.870588, 0.870588, 0.870588, 0.647059, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0011363 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+resource_local_to_scene = true
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 120.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 4.0
+scale = 0.68
+scale_curve = SubResource( 9 )
+color = Color( 0.937255, 0.0666667, 0.207843, 1 )
+color_ramp = SubResource( 7 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+resource_local_to_scene = true
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 250.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 100.0
+scale_curve = SubResource( 15 )
+color = Color( 0.937255, 0.0666667, 0.164706, 1 )
+
+[sub_resource type="Gradient" id=16]
+offsets = PoolRealArray( 0.69281, 0.888889, 1 )
+colors = PoolColorArray( 0.923875, 0.923875, 0.923875, 0.792388, 0.870588, 0.870588, 0.870588, 0.647059, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 16 )
+
+[sub_resource type="Curve" id=18]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0011363 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 18 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+resource_local_to_scene = true
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 120.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 4.0
+scale = 0.68
+scale_curve = SubResource( 19 )
+color = Color( 0.937255, 0.0666667, 0.207843, 1 )
+color_ramp = SubResource( 17 )
+
+[sub_resource type="Curve" id=21]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=22]
+curve = SubResource( 21 )
+
+[sub_resource type="ParticlesMaterial" id=23]
+resource_local_to_scene = true
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 250.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 100.0
+scale_curve = SubResource( 22 )
+color = Color( 0.937255, 0.0666667, 0.164706, 1 )
+
+[node name="enemyLaser" type="Node2D"]
+position = Vector2( 631, 94 )
 script = ExtResource( 2 )
+
+[node name="LaserEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 12 )
 
 [node name="Laser_Left" parent="." instance=ExtResource( 1 )]
 visible = false
-position = Vector2( -1, -22 )
-exclude_parent = true
+position = Vector2( 3, 55 )
 cast_to = Vector2( -3000, 0 )
 collision_mask = 9
 
 [node name="Line2D" parent="Laser_Left" index="0"]
-points = PoolVector2Array( 4.92646, 0, -406.682, 0 )
-default_color = Color( 0.207843, 0.847059, 0.741176, 1 )
+position = Vector2( -5, 0 )
+scale = Vector2( 1, 0.5 )
+points = PoolVector2Array( 7, 0, -486.654, 0 )
 
 [node name="CastingParticle" parent="Laser_Left" index="2"]
-process_material = SubResource( 10 )
+position = Vector2( -1, 1 )
+process_material = SubResource( 13 )
 
 [node name="collisionParticle" parent="Laser_Left" index="3"]
-process_material = SubResource( 11 )
+process_material = SubResource( 14 )
 
 [node name="beamParticle" parent="Laser_Left" index="4"]
-process_material = SubResource( 11 )
+process_material = SubResource( 14 )
 
 [node name="Laser_Right" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1, -22 )
-exclude_parent = true
+position = Vector2( 4, 55 )
 collision_mask = 9
 
 [node name="Line2D" parent="Laser_Right" index="0"]
-default_color = Color( 0.207843, 0.847059, 0.788235, 1 )
+position = Vector2( -5, 0 )
+scale = Vector2( 1, 0.5 )
 
 [node name="CastingParticle" parent="Laser_Right" index="2"]
-process_material = SubResource( 17 )
+process_material = SubResource( 20 )
 
 [node name="collisionParticle" parent="Laser_Right" index="3"]
-process_material = SubResource( 20 )
+position = Vector2( 464, 24 )
+process_material = SubResource( 23 )
 
 [node name="beamParticle" parent="Laser_Right" index="4"]
-process_material = SubResource( 20 )
-
-[node name="LaserEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 12 )
+process_material = SubResource( 23 )
 
 [editable path="Laser_Left"]
 [editable path="Laser_Right"]

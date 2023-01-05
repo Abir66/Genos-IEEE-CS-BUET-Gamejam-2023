@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Utils/Laser/assets/glowing_circle.png" type="Texture" id=1]
-[ext_resource path="res://src/Utils/Laser/Laser.gd" type="Script" id=2]
+[ext_resource path="res://src/Utils/enemyLaser/RandomLaser.gd" type="Script" id=2]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.69281, 0.888889, 1 )
@@ -28,7 +28,7 @@ orbit_velocity_random = 0.0
 tangential_accel = 4.0
 scale = 0.68
 scale_curve = SubResource( 9 )
-color = Color( 0.0666667, 0.823529, 0.937255, 1 )
+color = Color( 0.937255, 0.0666667, 0.207843, 1 )
 color_ramp = SubResource( 7 )
 
 [sub_resource type="Curve" id=1]
@@ -48,7 +48,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 tangential_accel = 100.0
 scale_curve = SubResource( 2 )
-color = Color( 0.0666667, 0.823529, 0.937255, 1 )
+color = Color( 0.937255, 0.0666667, 0.164706, 1 )
 
 [node name="Laser" type="RayCast2D"]
 light_mask = 17
@@ -107,4 +107,7 @@ texture = ExtResource( 1 )
 process_mode = 0
 one_shot = true
 
+[node name="ShootTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
