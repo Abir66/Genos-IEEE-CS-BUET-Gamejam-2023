@@ -4,8 +4,9 @@ extends Node
 signal updated
 signal died
 
-var charge: = 0 setget set_charge
+var charge: = 100 setget set_charge
 var deaths: = 0 setget set_deaths
+var damage1: = .01
 
 
 func reset():

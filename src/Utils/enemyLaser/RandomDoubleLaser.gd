@@ -15,13 +15,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if facing == "left": 
 #		$AnimatedSprite.flip_h = false
-		get_node("Laser_Left").visible = true
-		get_node("Laser_Right").visible = false
+		get_node("Laser_Left").set_process(true)
+		get_node("Laser_Right").set_process(false)
 		
 	else : 
 #		$AnimatedSprite.flip_h = true
-		get_node("Laser_Left").visible = false
-		get_node("Laser_Right").visible = true
+		get_node("Laser_Left").set_process(false)
+		get_node("Laser_Right").set_process(true)
 		
 
 

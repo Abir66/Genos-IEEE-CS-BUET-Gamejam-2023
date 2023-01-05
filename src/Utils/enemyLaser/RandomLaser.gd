@@ -16,10 +16,15 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var collider = get_collider()
+		
+	if is_casting and collider is Node2D:
+		if collider.name == "Player":
+			PlayerData.charge -= PlayerData.damage1
+	
 	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
 		self.is_casting = true
 		$Timer.start(1)
-		
 	
 	
 
