@@ -23,4 +23,4 @@ func RetryButtonClick():
 	pass # pore :3
 
 func ExitButtonClick():
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	get_tree().change_scene("res://src/UI/MainMenu/MainMenu.tscn")
