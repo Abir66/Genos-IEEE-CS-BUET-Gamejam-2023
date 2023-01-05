@@ -32,6 +32,7 @@ func _ready():
 	$IdleCollision.disabled = false
 	$JumpCollision.disabled = true
 	is_alive = true
+	get_node("Laser").facing = facing
 
 func _physics_process(delta):
 	
@@ -106,9 +107,12 @@ func shake_camera(duration = 0.2, frequency = 15, amplitude = 30, priority = 0):
 
 
 func animiation():
-	if facing == "left": $AnimatedSprite.flip_h = false
-	else : $AnimatedSprite.flip_h = true
-	
+	get_node("Laser").facing = facing
+	if facing == "left": 
+		$AnimatedSprite.flip_h = false
+	else : 
+		$AnimatedSprite.flip_h = true
+
 	if is_jumping:
 		$AnimatedSprite.play("Jump")
 	
