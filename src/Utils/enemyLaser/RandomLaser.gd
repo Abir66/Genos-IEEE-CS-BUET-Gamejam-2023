@@ -4,7 +4,7 @@ extends RayCast2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var shootTime=2
+export var shootTime=0.5
 var is_casting := false setget set_is_casting
 var isShot= false 
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +16,7 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if isShot==true and is_casting==false :
+	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
 		self.is_casting = true
 		$Timer.start(1)
 		
