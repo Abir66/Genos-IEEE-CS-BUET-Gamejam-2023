@@ -4,7 +4,7 @@ extends RayCast2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var shootTime=২2
+export var shootTime = 2
 var is_casting := false setget set_is_casting
 var isShot= false 
 # Called when the node enters the scene tree for the first time.

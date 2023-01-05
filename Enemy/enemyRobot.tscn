@@ -181,9 +181,6 @@ autostart = true
 [node name="Node2D" parent="." instance=ExtResource( 15 )]
 position = Vector2( 559, 351 )
 
-[node name="Laser_Left" parent="Node2D" index="1"]
-shootTime = null
-
 [node name="CastingParticle" parent="Node2D/Laser_Left" index="2"]
 process_material = SubResource( 37 )
 
@@ -192,9 +189,6 @@ process_material = SubResource( 39 )
 
 [node name="beamParticle" parent="Node2D/Laser_Left" index="4"]
 process_material = SubResource( 39 )
-
-[node name="Laser_Right" parent="Node2D" index="2"]
-shootTime = null
 
 [node name="CastingParticle" parent="Node2D/Laser_Right" index="2"]
 process_material = SubResource( 42 )
