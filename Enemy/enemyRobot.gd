@@ -29,6 +29,10 @@ func _ready():
 	set_physics_process(false)
 	set_process(false)
 	_velocity.x = speed.x
+	$Laser.visible = true
+	if right_going: $Laser.set_facing("right")
+	else : $Laser.set_facing("left")
+	
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta 
@@ -49,10 +53,8 @@ func _physics_process(delta: float) -> void:
 	_velocity.y = move_and_slide(_velocity,FLOOR_NORMAL).y
 	
 func _process(delta):
-	if right_going:
-		$Node2D.facing="right"
-	else:
-		$Node2D.facing="left"
+	if right_going: $Laser.set_facing("right")
+	else : $Laser.set_facing("left")
 	
 func _on_Timer_timeout():
 	pass # Replace with function body.

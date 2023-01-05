@@ -26,13 +26,14 @@ var is_running = false
 var is_grounded = false
 var facing = "right"
 var is_alive = false
+var is_shooting_laser = false
 
 
 func _ready():
 	$IdleCollision.disabled = false
 	$JumpCollision.disabled = true
 	is_alive = true
-	get_node("Laser").facing = facing
+	$Laser2.visible = true
 
 func _physics_process(delta):
 	
@@ -45,10 +46,12 @@ func _physics_process(delta):
 	if Input.is_action_pressed("right"):
 		velocity.x += speed * delta
 		facing = "right"
+		if is_shooting_laser: $Laser2.change_facing(facing)
 		
 	elif Input.is_action_pressed("left"):
 		velocity.x -= speed * delta
 		facing = "left"
+		if is_shooting_laser: $Laser2.change_facing(facing)
 	else:
 		velocity.x = lerp(velocity.x, 0, 0.2)
 
@@ -83,7 +86,6 @@ func _physics_process(delta):
 	#move
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 	
-	
 	animiation()
 	if is_jumping or is_double_jumping:
 		$IdleCollision.disabled = true
@@ -100,6 +102,13 @@ func _physics_process(delta):
 	if was_grounded == null || was_grounded != is_grounded:
 		emit_signal("grounded_updated", is_grounded)
 	
+	if Input.is_action_just_pressed("ShotTest"):
+		$Laser2.shoot_laser(facing)
+		is_shooting_laser = true
+	
+	if Input.is_action_just_released("ShotTest"):
+		$Laser2.stop_laser()
+		is_shooting_laser = false
 
 
 func shake_camera(duration = 0.2, frequency = 15, amplitude = 30, priority = 0):
@@ -107,7 +116,7 @@ func shake_camera(duration = 0.2, frequency = 15, amplitude = 30, priority = 0):
 
 
 func animiation():
-	get_node("Laser").facing = facing
+	
 	if facing == "left": 
 		$AnimatedSprite.flip_h = false
 	else : 

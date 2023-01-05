@@ -13,6 +13,11 @@ func _ready():
 	$Line2D.points[1] = $Line2D.points[0]
 	$ShootTimer.start(shootTime)
 	
+
+func set_facing(facing):
+	if facing == "left": cast_to.x = -30000
+	else: cast_to.x = 30000
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

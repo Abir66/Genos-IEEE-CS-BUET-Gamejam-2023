@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Enemy/assets/walk/Armature_Walking_17.png" type="Texture" id=1]
 [ext_resource path="res://Enemy/assets/Explosion/1_19.png" type="Texture" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://Enemy/assets/walk/Armature_Walking_12.png" type="Texture" id=12]
 [ext_resource path="res://Enemy/assets/walk/Armature_Walking_10.png" type="Texture" id=13]
 [ext_resource path="res://Enemy/assets/Explosion/1_13.png" type="Texture" id=14]
-[ext_resource path="res://src/Utils/enemyLaser/RandomDoubleLaser.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Enemy/assets/walk/Armature_Walking_06.png" type="Texture" id=16]
 [ext_resource path="res://Enemy/assets/Explosion/1_4.png" type="Texture" id=17]
 [ext_resource path="res://Enemy/assets/walk/Armature_Walking_08.png" type="Texture" id=18]
@@ -43,6 +42,7 @@
 [ext_resource path="res://Enemy/assets/walk/Armature_Walking_19.png" type="Texture" id=41]
 [ext_resource path="res://Enemy/assets/Explosion/1_3.png" type="Texture" id=42]
 [ext_resource path="res://Enemy/enemyRobot.gd" type="Script" id=43]
+[ext_resource path="res://src/Utils/enemyLaser/RandomLaser.tscn" type="PackedScene" id=44]
 
 [sub_resource type="SpriteFrames" id=33]
 animations = [ {
@@ -59,100 +59,6 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 18.5, 32 )
-
-[sub_resource type="Gradient" id=35]
-offsets = PoolRealArray( 0.69281, 0.888889, 1 )
-colors = PoolColorArray( 0.923875, 0.923875, 0.923875, 0.792388, 0.870588, 0.870588, 0.870588, 0.647059, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=27]
-gradient = SubResource( 35 )
-
-[sub_resource type="Curve" id=36]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0011363 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=28]
-curve = SubResource( 36 )
-
-[sub_resource type="ParticlesMaterial" id=37]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 120.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 4.0
-scale = 0.68
-scale_curve = SubResource( 28 )
-color = Color( 0.937255, 0.0666667, 0.207843, 1 )
-color_ramp = SubResource( 27 )
-
-[sub_resource type="Curve" id=38]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=29]
-curve = SubResource( 38 )
-
-[sub_resource type="ParticlesMaterial" id=39]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 100.0
-scale_curve = SubResource( 29 )
-color = Color( 0.937255, 0.0666667, 0.164706, 1 )
-
-[sub_resource type="Gradient" id=40]
-offsets = PoolRealArray( 0.69281, 0.888889, 1 )
-colors = PoolColorArray( 0.923875, 0.923875, 0.923875, 0.792388, 0.870588, 0.870588, 0.870588, 0.647059, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=30]
-gradient = SubResource( 40 )
-
-[sub_resource type="Curve" id=41]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0011363 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=31]
-curve = SubResource( 41 )
-
-[sub_resource type="ParticlesMaterial" id=42]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 120.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 4.0
-scale = 0.68
-scale_curve = SubResource( 31 )
-color = Color( 0.937255, 0.0666667, 0.207843, 1 )
-color_ramp = SubResource( 30 )
-
-[sub_resource type="Curve" id=43]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=32]
-curve = SubResource( 43 )
-
-[sub_resource type="ParticlesMaterial" id=44]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 100.0
-scale_curve = SubResource( 32 )
-color = Color( 0.937255, 0.0666667, 0.164706, 1 )
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 2
@@ -178,27 +84,6 @@ shape = SubResource( 34 )
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Node2D" parent="." instance=ExtResource( 15 )]
-position = Vector2( 559, 351 )
-
-[node name="CastingParticle" parent="Node2D/Laser_Left" index="2"]
-process_material = SubResource( 37 )
-
-[node name="collisionParticle" parent="Node2D/Laser_Left" index="3"]
-process_material = SubResource( 39 )
-
-[node name="beamParticle" parent="Node2D/Laser_Left" index="4"]
-process_material = SubResource( 39 )
-
-[node name="CastingParticle" parent="Node2D/Laser_Right" index="2"]
-process_material = SubResource( 42 )
-
-[node name="collisionParticle" parent="Node2D/Laser_Right" index="3"]
-process_material = SubResource( 44 )
-
-[node name="beamParticle" parent="Node2D/Laser_Right" index="4"]
-process_material = SubResource( 44 )
-
-[editable path="Node2D"]
-[editable path="Node2D/Laser_Left"]
-[editable path="Node2D/Laser_Right"]
+[node name="Laser" parent="." instance=ExtResource( 44 )]
+position = Vector2( 556, 409 )
+collision_mask = 9

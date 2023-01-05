@@ -1,27 +1,38 @@
 extends RayCast2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var is_casting := false setget set_is_casting
 var isShot= false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_physics_process(false)
 	$Line2D.points[1] = $Line2D.points[0]
+
+func shoot_laser(facing):
+	print("Called")
+	if facing == "left" : cast_to.x = -3000
+	else : cast_to.x = 3000
+	
+	self.is_casting = true
+	
+
+func stop_laser():
+	self.is_casting = false
+
+func change_facing(facing):
+	if facing == "left" : cast_to.x = -3000
+	else : cast_to.x = 3000
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("ShotTest") and is_casting==false :
-		self.is_casting = true
-		$Timer.start(1)
-		
-	if Input.is_action_just_released("ShotTest") and is_casting==true:
-		self.is_casting = false
-		$Timer.stop()
-	
+#func _process(delta):
+#	if Input.is_action_just_pressed("ShotTest") and is_casting==false :
+#		self.is_casting = true
+#		$Timer.start(1)
+#
+#	if Input.is_action_just_released("ShotTest") and is_casting==true:
+#		self.is_casting = false
+#		$Timer.stop()
+#
 
 #$beamParticle.process_material.emission_box_extents.x=castPoint.length()*0.5
 	
@@ -40,7 +51,7 @@ func _physics_process(delta):
 #		self.is_casting = not is_casting
 	
 	var cast_point = cast_to
-#	print(cast_point)
+	print(cast_point)
 	force_raycast_update()
 	$collisionParticle.emitting=is_colliding()
 	
@@ -53,9 +64,7 @@ func _physics_process(delta):
 	$beamParticle.position=cast_point*0.5
 	$beamParticle.process_material.emission_box_extents.x=cast_point.length()*0.5
 #	print($collisionParticle.position)
-	
-	
-	
+		
 	
 	
 func set_is_casting(cast: bool)->void:
