@@ -17,11 +17,12 @@ func _process(delta: float) -> void:
 #		$AnimatedSprite.flip_h = false
 		get_node("Laser_Left").visible = true
 		get_node("Laser_Right").visible = false
+		
 	else : 
 #		$AnimatedSprite.flip_h = true
 		get_node("Laser_Left").visible = false
 		get_node("Laser_Right").visible = true
-
+		
 
 
 	

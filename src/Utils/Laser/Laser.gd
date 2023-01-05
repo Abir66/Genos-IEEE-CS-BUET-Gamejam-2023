@@ -74,13 +74,13 @@ func set_is_casting(cast: bool)->void:
 
 func appear() -> void:
 	$Tween.stop_all()
-	$Tween.interpolate_property($Line2D,"width",0,7.0,0)
+	$Tween.interpolate_property($Line2D,"width",0,7.0,0.2)
 	$Tween.start()
 	
 	
 func disappear()->void:
 	$Tween.stop_all()
-	$Tween.interpolate_property($Line2D,"width",7.0,0,0)
+	$Tween.interpolate_property($Line2D,"width",7.0,0,0.2)
 	$Tween.start()
 	
 
