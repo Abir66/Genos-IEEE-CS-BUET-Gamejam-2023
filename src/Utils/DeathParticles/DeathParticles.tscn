@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Utils/DeathParticles/DeathParticles.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.522581, 1 )
@@ -47,6 +49,7 @@ one_shot = true
 explosiveness = 1.0
 local_coords = false
 process_material = SubResource( 5 )
+script = ExtResource( 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )

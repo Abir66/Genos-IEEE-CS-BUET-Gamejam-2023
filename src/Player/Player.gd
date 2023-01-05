@@ -134,5 +134,4 @@ func kill(wait_time = 2.0):
 	self.visible = false
 
 	yield(get_tree().create_timer(wait_time), "timeout")
-	_particle.queue_free()
 	queue_free()
