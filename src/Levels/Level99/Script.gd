@@ -11,14 +11,6 @@ signal set_health
 
 var camera : Camera2D
 
-func set_camera_limits():
-	var map_limits = $TileMap.get_used_rect()
-	var map_cellsize = $TileMap.cell_size
-	$Player/Camera2D.limit_left = map_limits.position.x * map_cellsize.x
-	$Player/Camera2D.limit_right = map_limits.end.x * map_cellsize.x
-	
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	camera = $Player/Camera2D

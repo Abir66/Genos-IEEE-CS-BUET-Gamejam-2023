@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal grounded_updated(is_grounded)
 signal set_charge(charge_value)
 signal set_health(health_value)
+signal player_died
 
 const UP_DIRECTION = Vector2.UP
 
@@ -168,8 +169,9 @@ func kill(wait_time = 2.0):
 	self.visible = false
 	$IdleCollision.disabled = true
 	$JumpCollision.disabled = true
+	emit_signal("player_died")
 
-	yield(get_tree().create_timer(wait_time), "timeout")
+	#yield(get_tree().create_timer(wait_time), "timeout")
 	queue_free()
 
 func set_charge(value: float):

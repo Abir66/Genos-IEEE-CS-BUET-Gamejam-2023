@@ -411,5 +411,20 @@ position = Vector2( 360, 600 )
 [node name="Battery" parent="." instance=ExtResource( 5 )]
 position = Vector2( 986, 896 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.75, 0.75 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+offset_v = -0.53
+drag_margin_left = 0.1
+drag_margin_top = 0.5
+drag_margin_right = 0.1
+drag_margin_bottom = 0.5
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[connection signal="player_died" from="Player" to="." method="_on_Player_player_died"]
 [connection signal="set_charge" from="Player" to="." method="_on_Player_set_charge"]
 [connection signal="set_health" from="Player" to="." method="_on_Player_set_health"]

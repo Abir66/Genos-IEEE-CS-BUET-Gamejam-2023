@@ -10,7 +10,7 @@
 [ext_resource path="res://src/Dialog/DialogTest/DialogTest.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Levels/Level01/DialogTrigger.gd" type="Script" id=9]
 [ext_resource path="res://src/UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Enemy/enemyRobot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Enemy/enemyRobot.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 

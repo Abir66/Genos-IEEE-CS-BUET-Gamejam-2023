@@ -9,7 +9,7 @@ var levelManager: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	levelManager = get_parent().get_parent()
+	levelManager = get_parent().get_parent().get_parent()
 	var resumeButton = get_node("ResumeButton")
 	var restartButton = get_node("RestartButton")
 	var exitButton = get_node("ExitButton")
@@ -20,9 +20,10 @@ func _ready():
 	
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
-		self.paused = !paused
-			
+#	if event.is_action_pressed("pause"):
+#		self.paused = !paused
+	pass
+	
 func ResumeButtonClick():
 	self.paused = false
 	# scene_tree.paused = false
