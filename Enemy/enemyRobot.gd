@@ -7,7 +7,6 @@ export var left_range=400.0
 export var transition_speed=3
 export var health: float = 100 setget set_health
 export var uniqueName:  String = "Enemy"
-var levelManager: Node2D
 
 const FLOOR_NORMAL: = Vector2.UP
 var _velocity:Vector2 = Vector2.ZERO
@@ -17,11 +16,15 @@ export var speed:Vector2 = Vector2(100.0,1000.0)
 onready var init_location = self.position
 var current_location = Vector2.ZERO
 var right_going = true
+var is_alive = true
 
-# Called when the node enters the scene tree for the first time.
+export var deathParticle : PackedScene
+
+signal enemy_died
+
+
 func _ready():
-	levelManager = get_tree().get_root().get_node("Level/level_manager")
-#	
+	
 	$AnimatedSprite.play("walk")
 	$AnimatedSprite.flip_h = true
 	right_going = true
@@ -42,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	var left_limit = init_location.x-left_range
 	if is_on_wall():
 		
-		#print(self.get_last_slide_collision().collider.name)
+		print(self.get_last_slide_collision().collider.name)
 		if not self.get_last_slide_collision().collider.name == "Player":
 			_velocity.x *= -1.0
 			$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
@@ -71,12 +74,26 @@ func _process(delta):
 
 func set_health(value: float):
 	health = value
+	if health <= 0: kill()
 	
-	if health <= 0:
-		Die()
+func take_damage(value : float): set_health(health - value)
 
-func Die():
-	levelManager.EnemyDied(uniqueName)
+func kill(wait_time = 2.0):
+	
+	if not is_alive : return
+	
+	is_alive = false
+	
+	var _particle = deathParticle.instance()
+	_particle.position = position
+	_particle.rotation = rotation
+	_particle.emitting = true
+	
+	get_tree().current_scene.add_child(_particle)
+	self.visible = false
+	emit_signal("enemy_died")
+
+	queue_free()
 
 func _on_Timer_timeout():
 	pass # Replace with function body.

@@ -166,6 +166,8 @@ func kill(wait_time = 2.0):
 	
 	get_tree().current_scene.add_child(_particle)
 	self.visible = false
+	$IdleCollision.disabled = true
+	$JumpCollision.disabled = true
 
 	yield(get_tree().create_timer(wait_time), "timeout")
 	queue_free()
@@ -176,18 +178,15 @@ func set_charge(value: float):
 	if charge > 100 : charge = 100
 	emit_signal("set_charge", charge)
 	
-func decrease_charge(value: float):
-	set_charge(charge - value)
-
 func set_health(value: float):
 	health = value
-	if health <= 0: pass
+	if health <= 0: kill()
 	if health > 100 : health = 100
 	emit_signal("set_health", health)
+	
+func decrease_charge(value: float): set_charge(charge - value)
+func decrease_health(value : float): set_health(health - value)
 	
 func get_health() : return health
 func get_charge() : return charge
 func got_battery(charge) : set_charge(self.charge + charge)
-	
-func Die():
-	print("die")

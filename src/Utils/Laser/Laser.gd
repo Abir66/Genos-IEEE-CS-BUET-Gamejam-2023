@@ -1,6 +1,6 @@
 extends RayCast2D
 
-var damage: float = 2
+var damage: float = 200
 var is_casting := false setget set_is_casting
 var isShot= false
 # Called when the node enters the scene tree for the first time.
@@ -63,7 +63,7 @@ func _process(delta):
 	
 	if is_casting and collider is CollisionObject2D:
 		if collider.collision_layer == 2:
-			collider.health -= damage
+			collider.take_damage(damage * delta)
 
 
 func appear() -> void:
