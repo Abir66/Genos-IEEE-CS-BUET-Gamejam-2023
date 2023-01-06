@@ -1,6 +1,6 @@
 extends RayCast2D
 
-var damage: float = 1
+var damage: float = 2
 var is_casting := false setget set_is_casting
 var isShot= false
 # Called when the node enters the scene tree for the first time.
@@ -61,8 +61,8 @@ func set_is_casting(cast: bool)->void:
 func _process(delta):
 	var collider = get_collider()
 	
-	if is_casting and collider is KinematicBody2D:
-		if collider.name == "Enemy":
+	if is_casting and collider is CollisionObject2D:
+		if collider.collision_layer == 2:
 			collider.health -= damage
 
 
