@@ -20,7 +20,7 @@ func _ready():
 	root = sceneTree.get_root()
 	levelIDManager = get_node("level" + str(levelId) + "_manager")
 	# dialog = root.get_node("Level/ui/DialogTest")
-	inGameOverlay = root.get_node("Level/ui/in_game_overlay")
+	inGameOverlay = get_node("ui/in_game_overlay")
 	sceneTree.paused = false
 	healthBar = inGameOverlay.get_node("HealthBar")
 	chargeBar = inGameOverlay.get_node("ChargeBar")
