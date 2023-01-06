@@ -15,9 +15,14 @@ func _ready():
 	
 
 func set_facing(facing):
-	if facing == "left": cast_to.x = -30000
-	else: cast_to.x = 30000
-	
+	if facing == "left": 
+		cast_to.x = -30000
+		$CastingParticle.process_material.direction.x=-1
+		$collisionParticle.process_material.direction.x=-1
+	else: 
+		cast_to.x = 30000
+		$CastingParticle.process_material.direction.x=1
+		$collisionParticle.process_material.direction.x=1
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
