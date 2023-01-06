@@ -4,20 +4,26 @@ var damage: float = 100
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var shootTime = 2
+export var intervalTime =3
+export var shootTime=0.7
 var is_casting := false setget set_is_casting
 var isShot= false 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_physics_process(false)
 	$Line2D.points[1] = $Line2D.points[0]
-	$ShootTimer.start(shootTime)
+	$ShootTimer.start(intervalTime)
 	
 
 func set_facing(facing):
-	if facing == "left": cast_to.x = -30000
-	else: cast_to.x = 30000
-	
+	if facing == "left": 
+		cast_to.x = -30000
+		$CastingParticle.process_material.direction.x=-1
+		$collisionParticle.process_material.direction.x=-1
+	else: 
+		cast_to.x = 30000
+		$CastingParticle.process_material.direction.x=1
+		$collisionParticle.process_material.direction.x=1
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,7 +36,7 @@ func _process(delta):
 	
 	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
 		self.is_casting = true
-		$Timer.start(1)
+		$Timer.start(shootTime)
 	
 	
 
@@ -103,5 +109,5 @@ func _on_Timer_timeout():
 
 func _on_ShootTimer_timeout():
 	self.isShot=true
-	$ShootTimer.start(shootTime)
+	$ShootTimer.start(intervalTime)
 	
