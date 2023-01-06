@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	var left_limit = init_location.x-left_range
 	if is_on_wall():
 		
-		print(self.get_last_slide_collision().collider.name)
+		#print(self.get_last_slide_collision().collider.name)
 		if not self.get_last_slide_collision().collider.name == "Player":
 			_velocity.x *= -1.0
 			$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
