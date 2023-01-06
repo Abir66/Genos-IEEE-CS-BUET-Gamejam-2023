@@ -10,6 +10,8 @@ export var double_jump_strength = 1200.0
 export var maximum_jumps = 2
 export var gravity = 4500
 export var max_fall_speed = 10000
+export var double_jump_charge = 5
+export var laser_charge_rate = 0.005
 
 export var deathParticle : PackedScene
 
@@ -27,6 +29,8 @@ var is_grounded = false
 var facing = "right"
 var is_alive = false
 var is_shooting_laser = false
+
+var shooting_time_start : int
 
 
 func _ready():
@@ -59,12 +63,11 @@ func _physics_process(delta):
 	# States
 	is_falling = velocity.y > 0.0 and not is_on_floor()
 	is_jumping = Input.is_action_just_pressed("jump") and is_on_floor()
-	is_double_jumping = Input.is_action_just_pressed("jump") and (is_falling or is_jumping or not is_on_floor())
+	is_double_jumping = Input.is_action_just_pressed("jump") and (is_falling or is_jumping or not is_on_floor()) and PlayerData.charge >= double_jump_charge
 	is_jump_cancelled = Input.is_action_just_released("jump") and velocity.y < 0.0
 	is_idling = is_on_floor() and not (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_running = is_on_floor() and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_grounded = is_on_floor()
-	
 	
 	
 	#Jumps
@@ -76,12 +79,12 @@ func _physics_process(delta):
 		jumps_made += 1
 		if jumps_made <= maximum_jumps:
 			velocity.y = -double_jump_strength
+			PlayerData.decrease_charge(double_jump_charge)
 			shake_camera(0.2, 15, 20, 0)
 			$Explosion.start_animation()
 			
 	elif is_idling or is_running:
 		jumps_made = 0
-		
 	
 	#move
 	velocity = move_and_slide(velocity, UP_DIRECTION)
@@ -102,15 +105,41 @@ func _physics_process(delta):
 	if was_grounded == null || was_grounded != is_grounded:
 		emit_signal("grounded_updated", is_grounded)
 	
-	if Input.is_action_just_pressed("ShotTest"):
-		$Laser2.shoot_laser(facing)
-		is_shooting_laser = true
-		shake_camera(0.5, 15, 30, 0)
+	
+	#Laser
+	if (Input.is_action_just_pressed("ShotTest") or Input.is_action_pressed("ShotTest")) and PlayerData.charge > 200 * laser_charge_rate:
+		shake_camera(0.2, 15, 25, 0)
+		if not is_shooting_laser:
+			$Laser2.shoot_laser(facing) 
+			is_shooting_laser = true
+			shooting_time_start = Time.get_ticks_msec()
+			
 	
 	if Input.is_action_just_released("ShotTest"):
-		$Laser2.stop_laser()
-		is_shooting_laser = false
+		if is_shooting_laser:
+			$Laser2.stop_laser()
+			is_shooting_laser = false
+			deduce_laser_charge()
+		
+	if is_shooting_laser:
+		var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
+		if(shooting_time_elapsed > 100) : deduce_laser_charge()
+		if PlayerData.charge < shooting_time_elapsed * laser_charge_rate:
+			$Laser2.stop_laser()
+			is_shooting_laser = false
+			deduce_laser_charge()
+			
+			
+	
+			
+			
 
+func deduce_laser_charge():
+	var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
+	PlayerData.decrease_charge(shooting_time_elapsed * laser_charge_rate)
+	shooting_time_start = Time.get_ticks_msec()
+	
+	
 
 func shake_camera(duration = 0.2, frequency = 15, amplitude = 30, priority = 0):
 	$Camera2D/ScreenShake.start(duration, frequency, amplitude, priority)
@@ -118,19 +147,12 @@ func shake_camera(duration = 0.2, frequency = 15, amplitude = 30, priority = 0):
 
 func animiation():
 	
-	if facing == "left": 
-		$AnimatedSprite.flip_h = false
-	else : 
-		$AnimatedSprite.flip_h = true
+	if facing == "left": $AnimatedSprite.flip_h = false
+	else : $AnimatedSprite.flip_h = true
 
-	if is_jumping:
-		$AnimatedSprite.play("Jump")
-	
-	elif is_running:
-		$AnimatedSprite.play("Run")
-		
-	elif is_idling:
-		$AnimatedSprite.play("Idle")
+	if is_jumping: $AnimatedSprite.play("Jump")
+	elif is_running: $AnimatedSprite.play("Run")
+	elif is_idling: $AnimatedSprite.play("Idle")
 		
 
 func kill(wait_time = 2.0):

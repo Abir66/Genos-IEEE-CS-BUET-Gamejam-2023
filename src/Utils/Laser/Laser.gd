@@ -8,7 +8,6 @@ func _ready():
 	$Line2D.points[1] = $Line2D.points[0]
 
 func shoot_laser(facing):
-	print("Called")
 	if facing == "left" : cast_to.x = -3000
 	else : cast_to.x = 3000
 	
@@ -21,29 +20,7 @@ func stop_laser():
 func change_facing(facing):
 	if facing == "left" : cast_to.x = -3000
 	else : cast_to.x = 3000
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	if Input.is_action_just_pressed("ShotTest") and is_casting==false :
-#		self.is_casting = true
-#		$Timer.start(1)
-#
-#	if Input.is_action_just_released("ShotTest") and is_casting==true:
-#		self.is_casting = false
-#		$Timer.stop()
-#
-
-#$beamParticle.process_material.emission_box_extents.x=castPoint.length()*0.5
-	
-
-#func _unhandled_input(event: InputEvent)->void:
-#	if event is InputEventMouseButton:
-#		self.is_casting = not is_casting
-
-#func _unhandled_key_input(event):
-	#if event is InputEventKey:
-		#self.set_is_casting(event.pressed)
+		
 	
 func _physics_process(delta):
 	

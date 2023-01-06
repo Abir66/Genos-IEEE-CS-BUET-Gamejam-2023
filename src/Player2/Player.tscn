@@ -95,12 +95,12 @@ wait_time = 0.5
 one_shot = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 1.5, 1, 1 )
+modulate = Color( 1.2, 0.59, 1, 1 )
 position = Vector2( -4.76837e-07, 0 )
 scale = Vector2( 0.162085, 0.168698 )
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 8
+frame = 13
 playing = true
 
 [node name="Explosion" type="AnimatedSprite" parent="."]
@@ -110,7 +110,7 @@ rotation = -1.5708
 scale = Vector2( 1.78342, 1.7079 )
 frames = SubResource( 4 )
 animation = "Explosion"
-frame = 16
+frame = 8
 speed_scale = 2.0
 playing = true
 script = ExtResource( 11 )

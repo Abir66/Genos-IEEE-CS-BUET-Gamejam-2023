@@ -25,7 +25,7 @@ func _process(delta):
 		
 	if is_casting and collider is Node2D:
 		if collider.name == "Player":
-			PlayerData.charge -= PlayerData.damage1
+			print("Enemy laser and player collision detection..... RandomLaser.gd")
 	
 	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
 		self.is_casting = true
