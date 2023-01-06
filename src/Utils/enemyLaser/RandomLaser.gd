@@ -1,6 +1,6 @@
 extends RayCast2D
 
-
+var damage: float = 1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -23,9 +23,9 @@ func set_facing(facing):
 func _process(delta):
 	var collider = get_collider()
 		
-	if is_casting and collider is Node2D:
-		if collider.name == "Player":
-			# Collision detected here....
+	if is_casting and collider is CollisionObject2D:
+		if collider.collision_layer == 1:
+			collider.health -= damage
 			pass
 	
 	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
