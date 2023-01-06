@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Utils/ProgressBar/ProgressBar.gd" type="Script" id=1]
-[ext_resource path="res://src/Utils/ProgressBar/assets/shield_bar_under.svg" type="Texture" id=2]
+[ext_resource path="res://src/Utils/ProgressBar/assets/shield_bar_progress.svg" type="Texture" id=2]
 [ext_resource path="res://src/Utils/ProgressBar/assets/shield_bar_over.svg" type="Texture" id=3]
-[ext_resource path="res://src/Utils/ProgressBar/assets/shield_bar_progress.svg" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 0.270588, 0.270588, 1, 0.294118, 0.356863, 0.670588, 1 )
@@ -49,9 +48,9 @@ anchor_right = 1.0
 margin_left = -224.0
 margin_bottom = 33.0
 value = 50.0
-texture_under = ExtResource( 2 )
+texture_under = ExtResource( 3 )
 texture_over = ExtResource( 3 )
-texture_progress = ExtResource( 4 )
+texture_progress = ExtResource( 2 )
 tint_progress = Color( 1, 0.262745, 0.262745, 1 )
 nine_patch_stretch = true
 stretch_margin_left = 37
