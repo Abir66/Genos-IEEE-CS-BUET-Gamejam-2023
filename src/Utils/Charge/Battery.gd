@@ -7,10 +7,10 @@ export var charge: = 10
 
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
-	picked()
+	picked(body)
 
 
-func picked() -> void:
+func picked(body: PhysicsBody2D) -> void:
 #	get_tree().change_scene("res://src/UI/GameOverMenu/GameOverMenu.tscn")
-	PlayerData.charge += charge
+	body.charge += charge
 	anim_player.play("picked")

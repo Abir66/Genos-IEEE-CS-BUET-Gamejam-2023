@@ -1,10 +1,10 @@
 extends RayCast2D
 
-
+var damage: float = 1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var shootTime=2
+export var shootTime = 2
 var is_casting := false setget set_is_casting
 var isShot= false 
 # Called when the node enters the scene tree for the first time.
@@ -13,13 +13,24 @@ func _ready():
 	$Line2D.points[1] = $Line2D.points[0]
 	$ShootTimer.start(shootTime)
 	
+
+func set_facing(facing):
+	if facing == "left": cast_to.x = -30000
+	else: cast_to.x = 30000
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if isShot==true and is_casting==false :
+	var collider = get_collider()
+		
+	if is_casting and collider is CollisionObject2D:
+		if collider.collision_layer == 1:
+			collider.health -= damage
+			pass
+	
+	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
 		self.is_casting = true
 		$Timer.start(1)
-		
 	
 	
 

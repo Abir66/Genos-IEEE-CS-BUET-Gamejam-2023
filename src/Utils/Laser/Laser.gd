@@ -1,38 +1,27 @@
 extends RayCast2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var damage: float = 2
 var is_casting := false setget set_is_casting
 var isShot= false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_physics_process(false)
 	$Line2D.points[1] = $Line2D.points[0]
+
+func shoot_laser(facing):
+	if facing == "left" : cast_to.x = -3000
+	else : cast_to.x = 3000
 	
+	self.is_casting = true
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("ShotTest") and is_casting==false :
-		self.is_casting = true
-		$Timer.start(1)
+
+func stop_laser():
+	self.is_casting = false
+
+func change_facing(facing):
+	if facing == "left" : cast_to.x = -3000
+	else : cast_to.x = 3000
 		
-	if Input.is_action_just_released("ShotTest") and is_casting==true:
-		self.is_casting = false
-		$Timer.stop()
-	
-
-#$beamParticle.process_material.emission_box_extents.x=castPoint.length()*0.5
-	
-
-#func _unhandled_input(event: InputEvent)->void:
-#	if event is InputEventMouseButton:
-#		self.is_casting = not is_casting
-
-#func _unhandled_key_input(event):
-	#if event is InputEventKey:
-		#self.set_is_casting(event.pressed)
 	
 func _physics_process(delta):
 	
@@ -40,7 +29,7 @@ func _physics_process(delta):
 #		self.is_casting = not is_casting
 	
 	var cast_point = cast_to
-#	print(cast_point)
+	# print(cast_point)
 	force_raycast_update()
 	$collisionParticle.emitting=is_colliding()
 	
@@ -53,9 +42,7 @@ func _physics_process(delta):
 	$beamParticle.position=cast_point*0.5
 	$beamParticle.process_material.emission_box_extents.x=cast_point.length()*0.5
 #	print($collisionParticle.position)
-	
-	
-	
+		
 	
 	
 func set_is_casting(cast: bool)->void:
@@ -70,6 +57,13 @@ func set_is_casting(cast: bool)->void:
 		
 	set_physics_process(is_casting)
 	
+
+func _process(delta):
+	var collider = get_collider()
+	
+	if is_casting and collider is CollisionObject2D:
+		if collider.collision_layer == 2:
+			collider.health -= damage
 
 
 func appear() -> void:
