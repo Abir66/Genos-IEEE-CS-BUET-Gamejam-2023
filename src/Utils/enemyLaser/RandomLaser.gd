@@ -4,8 +4,8 @@ var damage: float = 100
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var intervalTime =3
-export var shootTime=0.7
+var intervalTime =3
+var shootTime=0.7
 var is_casting := false setget set_is_casting
 var isShot= false 
 # Called when the node enters the scene tree for the first time.
