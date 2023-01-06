@@ -2,6 +2,7 @@ extends Panel
 
 onready var scene_tree: SceneTree = get_tree()
 var paused: = false setget set_paused
+var levelManaer: Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -9,6 +10,7 @@ var paused: = false setget set_paused
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	levelManaer = scene_tree.get_root().get_node("level_root/level_manager")
 	var resumeButton = get_node("ResumeButton")
 	var restartButton = get_node("RestartButton")
 	var exitButton = get_node("ExitButton")
@@ -23,18 +25,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.paused = !paused
 			
 func ResumeButtonClick():
-	paused = false
-	scene_tree.paused = false
-	self.visible = false
+	self.paused = false
+	# scene_tree.paused = false
+	# self.visible = false
 
 func set_paused(value: bool) -> void:
 	paused = value
-	scene_tree.paused = value
+	scene_tree.paused = value and (not levelManaer.onDialog)
 	self.visible = value
 	
 func RestartButtonClick():
-	paused = false
-	get_tree().paused = false
+	# self.paused = false
+	# get_tree().paused = false
 	get_tree().reload_current_scene()
 	
 func ExitButtonClick():
