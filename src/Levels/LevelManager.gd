@@ -1,4 +1,4 @@
-tends Node2D
+extends Node2D
 
 var level : Node
 var cmaera_position : Vector2

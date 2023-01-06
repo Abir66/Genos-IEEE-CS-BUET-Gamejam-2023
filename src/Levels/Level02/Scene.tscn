@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Levels/Level-2/Script.gd" type="Script" id=2]
 [ext_resource path="res://Enemy/enemyRobot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Levels/Level02/assets/blacktile.png" type="Texture" id=4]
-[ext_resource path="res://PrefabScenes/LevelManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Utils/Charge/Battery.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -395,11 +395,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="level_manager" parent="." instance=ExtResource( 5 )]
-levelId = 2
-
-[node name="level2_manager" type="Node2D" parent="level_manager"]
-
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 format = 1
@@ -410,3 +405,9 @@ position = Vector2( 1398, 546 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 360, 600 )
+
+[node name="Battery" parent="." instance=ExtResource( 5 )]
+position = Vector2( 986, 896 )
+
+[connection signal="set_charge" from="Player" to="." method="_on_Player_set_charge"]
+[connection signal="set_health" from="Player" to="." method="_on_Player_set_health"]

@@ -14,12 +14,6 @@ func _ready() -> void:
 	value = 100
 	max_value = 100
 
-# For testing
-#func _unhandled_input(event: InputEvent) -> void:
-#	if Input.is_action_pressed("Decrease_Bar"):
-#		set_value(value - 10)
-#	elif Input.is_action_pressed("Increase_Bar"):
-#		set_value(value + 10)
 
 func initialize(init_value, init_max_value = 100):
 	value = init_value

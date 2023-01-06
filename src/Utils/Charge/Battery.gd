@@ -11,6 +11,5 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 
 
 func picked(body: PhysicsBody2D) -> void:
-#	get_tree().change_scene("res://src/UI/GameOverMenu/GameOverMenu.tscn")
-	body.charge += charge
+	body.got_battery(charge)
 	anim_player.play("picked")

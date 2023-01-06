@@ -1,10 +1,6 @@
 extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-#export var spawn_location=Vector2(500.0,0)
 export var enable_shooting=true
 export var right_range=400.0
 export var left_range=400.0
@@ -25,8 +21,7 @@ var right_going = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	levelManager = get_tree().get_root().get_node("Level/level_manager")
-#	position = spawn_location
-#	current_location = spawn_location
+#	
 	$AnimatedSprite.play("walk")
 	$AnimatedSprite.flip_h = true
 	right_going = true
@@ -81,7 +76,7 @@ func set_health(value: float):
 		Die()
 
 func Die():
-	levelManager.EnemyDied(uniqueName)
+	levelManager.EnemyDied(uniqueName)ddd
 
 func _on_Timer_timeout():
 	pass # Replace with function body.

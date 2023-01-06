@@ -40,9 +40,6 @@ margin_right = 50.0
 margin_bottom = -27.0
 custom_fonts/font = ExtResource( 3 )
 text = "Start"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CreditsButton" type="Button" parent="TitleMenu"]
 anchor_left = 0.5

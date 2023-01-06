@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 signal grounded_updated(is_grounded)
+signal set_charge(charge_value)
+signal set_health(health_value)
 
 const UP_DIRECTION = Vector2.UP
 
@@ -19,7 +21,6 @@ export var deathParticle : PackedScene
 
 var jumps_made = 0
 var velocity = Vector2.ZERO
-var levelManager: Node2D
 
 #states
 var is_falling = false
@@ -36,10 +37,8 @@ var is_shooting_laser = false
 var shooting_time_start : int
 
 func _ready():
-	levelManager = get_tree().get_root().get_node("Level/level_manager")
-	
-	levelManager.healthBar.set_value(100)
-	levelManager.chargeBar.set_value(0)
+	set_charge(100)
+	set_health(100)
 	
 	$IdleCollision.disabled = false
 	$JumpCollision.disabled = true
@@ -84,7 +83,7 @@ func _physics_process(delta):
 		jumps_made += 1
 		if jumps_made <= maximum_jumps:
 			velocity.y = -double_jump_strength
-			self.charge -= double_jump_charge
+			decrease_charge(double_jump_charge)
 			shake_camera(0.2, 15, 20, 0)
 			$Explosion.start_animation()
 			
@@ -98,8 +97,7 @@ func _physics_process(delta):
 	if is_jumping or is_double_jumping:
 		$IdleCollision.disabled = true
 		$JumpCollision.disabled = false
-		
-		
+
 	else :
 		$IdleCollision.disabled = false
 		$JumpCollision.disabled = true
@@ -137,10 +135,9 @@ func _physics_process(delta):
 
 func deduce_laser_charge():
 	var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
-	self.charge -= shooting_time_elapsed * laser_charge_rate
+	decrease_charge(shooting_time_elapsed * laser_charge_rate)
 	shooting_time_start = Time.get_ticks_msec()
-	
-	
+
 
 func shake_camera(duration = 0.2, frequency = 15, amplitude = 30, priority = 0):
 	$Camera2D/ScreenShake.start(duration, frequency, amplitude, priority)
@@ -175,19 +172,22 @@ func kill(wait_time = 2.0):
 
 func set_charge(value: float):
 	charge = value
+	if charge < 0: charge = 0
+	if charge > 100 : charge = 100
+	emit_signal("set_charge", charge)
 	
-	if charge < 0:
-		charge = 0
-		
-	levelManager.chargeBar.set_value(charge)
+func decrease_charge(value: float):
+	set_charge(charge - value)
 
 func set_health(value: float):
 	health = value
-	levelManager.healthBar.set_value(health)
+	if health <= 0: pass
+	if health > 100 : health = 100
+	emit_signal("set_health", health)
 	
-	if health <= 0:
-		Die()
-
+func get_health() : return health
+func get_charge() : return charge
+func got_battery(charge) : set_charge(self.charge + charge)
+	
 func Die():
 	print("die")
-	levelManager.GameOver()
