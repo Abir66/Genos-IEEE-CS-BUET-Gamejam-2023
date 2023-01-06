@@ -32,16 +32,14 @@ var is_shooting_laser = false
 
 var shooting_time_start : int
 
-
 func _ready():
 	$IdleCollision.disabled = false
 	$JumpCollision.disabled = true
 	is_alive = true
-	$Laser2.visible = true
-
+	$Laser2.visible = true	
+	
 func _physics_process(delta):
 	
-		
 	velocity.y += gravity * delta
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
 	
@@ -94,11 +92,12 @@ func _physics_process(delta):
 		$IdleCollision.disabled = true
 		$JumpCollision.disabled = false
 		
+		
 	else :
 		$IdleCollision.disabled = false
 		$JumpCollision.disabled = true
-	
-	
+		
+		
 	var was_grounded = is_grounded
 	is_grounded = is_on_floor()
 	
@@ -128,11 +127,7 @@ func _physics_process(delta):
 			$Laser2.stop_laser()
 			is_shooting_laser = false
 			deduce_laser_charge()
-			
-			
-	
-			
-			
+				
 
 func deduce_laser_charge():
 	var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
@@ -171,3 +166,4 @@ func kill(wait_time = 2.0):
 
 	yield(get_tree().create_timer(wait_time), "timeout")
 	queue_free()
+

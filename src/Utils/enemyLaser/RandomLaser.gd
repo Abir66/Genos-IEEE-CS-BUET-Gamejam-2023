@@ -25,7 +25,8 @@ func _process(delta):
 		
 	if is_casting and collider is Node2D:
 		if collider.name == "Player":
-			print("Enemy laser and player collision detection..... RandomLaser.gd")
+			# Collision detected here....
+			pass
 	
 	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
 		self.is_casting = true

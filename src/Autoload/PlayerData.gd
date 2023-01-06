@@ -1,6 +1,5 @@
 extends Node
 
-
 signal updated
 signal died
 
@@ -9,7 +8,6 @@ var deaths: = 0 setget set_deaths
 var damage1: = .01
 
 func Die():
-	#print("die")
 	pass
 
 func reset():

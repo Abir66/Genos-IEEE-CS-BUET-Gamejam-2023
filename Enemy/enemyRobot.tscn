@@ -68,8 +68,6 @@ script = ExtResource( 43 )
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 position = Vector2( 563.5, 420.5 )
 scale = Vector2( 2.95, 4.25 )
-process_parent = true
-physics_process_parent = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 565, 428 )
