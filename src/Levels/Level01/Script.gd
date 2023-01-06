@@ -5,6 +5,8 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
+signal level_clear
+
 func set_camera_limits():
 	var map_limits = $TileMap.get_used_rect()
 	var map_cellsize = $TileMap.cell_size
@@ -21,5 +23,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("kill"):
-		if is_instance_valid($Player):
-			$Player.kill()
+		emit_signal("level_clear")

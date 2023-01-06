@@ -2,6 +2,7 @@ extends Node2D
 
 var level : Node
 var cmaera_position : Vector2
+var is_paused : bool
 
 
 func _ready():
@@ -14,6 +15,7 @@ func load_level(level_name):
 	level.position = Vector2.ZERO
 	$LevelContainer.add_child(level)
 	
+	
 	# Connect signals
 	level.connect("level_clear", self, "on_level_clear")
 	level.connect("set_charge", self, "set_charge")
@@ -22,8 +24,11 @@ func load_level(level_name):
 	set_health(level.get_node("Player").get_health())
 	set_charge(level.get_node("Player").get_charge())
 	
+	is_paused = false
+	
 func restart_level():
 	pass
+	
 	
 func level_lost():
 	pass
@@ -32,9 +37,10 @@ func level_win():
 	pass
 	
 func next_level():
-	load_level("Level-3")
+	load_level("Level02")
 
 func on_level_clear():
+	# Need to apply transition
 	next_level()
 
 # Signals
