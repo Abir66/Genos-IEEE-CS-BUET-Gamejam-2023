@@ -39,6 +39,7 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 120.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 0.6
 color = Color( 0.819608, 0.101961, 0.101961, 1 )
 
 [sub_resource type="ParticlesMaterial" id=11]
@@ -48,11 +49,11 @@ emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
 spread = 12.92
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
+initial_velocity = 200.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 tangential_accel = 100.0
-scale = 0.4
+scale = 0.2
 color = Color( 0.839216, 0.14902, 0.14902, 1 )
 
 [node name="Laser" type="RayCast2D"]
@@ -104,7 +105,7 @@ texture = ExtResource( 1 )
 modulate = Color( 1.3, 1, 1, 1 )
 scale = Vector2( 0.6, 0.6 )
 emitting = false
-amount = 12
+amount = 25
 lifetime = 0.3
 visibility_rect = Rect2( -1, -1, 2, 20 )
 local_coords = false
