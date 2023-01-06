@@ -9,6 +9,7 @@ export var enable_shooting=true
 export var right_range=400.0
 export var left_range=400.0
 export var transition_speed=3
+export var health: float = 100 setget set_health
 
 const FLOOR_NORMAL: = Vector2.UP
 var _velocity:Vector2 = Vector2.ZERO
@@ -69,6 +70,13 @@ func _physics_process(delta: float) -> void:
 func _process(delta):
 	if right_going: $Laser.set_facing("right")
 	else : $Laser.set_facing("left")
+
+func set_health(value: float):
+	health = value
 	
+	if health <= 0:
+		print("enemy die")
+		queue_free()
+
 func _on_Timer_timeout():
 	pass # Replace with function body.

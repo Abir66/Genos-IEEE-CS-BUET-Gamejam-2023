@@ -1,6 +1,6 @@
 extends RayCast2D
 
-
+var damage: float = 0.01
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

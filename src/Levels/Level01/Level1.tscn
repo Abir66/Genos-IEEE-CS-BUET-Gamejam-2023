@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/prototype/prototype_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/Dialog/DialogTest/DialogTest.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Levels/Level01/DialogTrigger.gd" type="Script" id=9]
 [ext_resource path="res://src/UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemy/enemyRobot.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -83,6 +84,11 @@ script = ExtResource( 9 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogTrigger"]
 shape = SubResource( 1 )
 
+[node name="Enemy" parent="." instance=ExtResource( 11 )]
+position = Vector2( 201, -10 )
+right_range = 100.0
+left_range = 100.0
+
 [connection signal="body_entered" from="DialogTrigger" to="DialogTrigger" method="_on_DialogTrigger_body_entered"]
 
 [editable path="ui/DialogTest"]
@@ -91,3 +97,4 @@ shape = SubResource( 1 )
 [editable path="ui/DialogTest/Speech3"]
 [editable path="ui/DialogTest/Speech4"]
 [editable path="ui/DialogTest/Speech5"]
+[editable path="Enemy"]

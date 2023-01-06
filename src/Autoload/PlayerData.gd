@@ -3,9 +3,9 @@ extends Node
 signal updated
 signal died
 
-var charge: = 20 setget set_charge
-var deaths: = 0 setget set_deaths
-var damage1: = .01
+var charge: float = 20 setget set_charge
+var deaths: int = 0 setget set_deaths
+var damage: float = .1
 
 func Die():
 	pass
@@ -23,7 +23,7 @@ func increase_charge(amount : float):
 	if charge > 100 : charge = 100
 	
 
-func set_charge(new_charge: int) -> void:
+func set_charge(new_charge: float) -> void:
 	charge = new_charge
 	emit_signal("updated")
 
