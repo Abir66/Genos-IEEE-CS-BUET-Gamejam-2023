@@ -76,7 +76,7 @@ func set_health(value: float):
 		Die()
 
 func Die():
-	levelManager.EnemyDied(uniqueName)ddd
+	levelManager.EnemyDied(uniqueName)
 
 func _on_Timer_timeout():
 	pass # Replace with function body.

@@ -6,6 +6,8 @@ extends Node2D
 # var b = "text"
 
 signal level_clear
+signal set_charge
+signal set_health
 
 func set_camera_limits():
 	var map_limits = $TileMap.get_used_rect()
@@ -26,3 +28,10 @@ func _process(delta):
 		get_tree().quit()
 		emit_signal("level_clear")
 		print("signal emitted")
+
+func _on_Player_set_charge(charge_value):
+	emit_signal("set_charge", charge_value)
+
+
+func _on_Player_set_health(health_value):
+	emit_signal("set_health", health_value)
