@@ -9,8 +9,12 @@ func _ready():
 	$Line2D.points[1] = $Line2D.points[0]
 
 func shoot_laser(facing):
-	if facing == "left" : cast_to.x = -3000
-	else : cast_to.x = 3000
+	if facing == "left" : 
+		cast_to.x = -3000
+		$CastingParticle.process_material.direction.x=-1
+	else : 
+		cast_to.x = 3000
+		$CastingParticle.process_material.direction.x=1
 	
 	self.is_casting = true
 	
