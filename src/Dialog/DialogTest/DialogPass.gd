@@ -16,16 +16,15 @@ func _ready():
 		
 	speeches[0].visible = true
 
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_SPACE:
-			speeches[current].visible = false
-			current += 1
-			
-			if current < speeches.size():
-				speeches[current].visible = true
-			else:
-				queue_free()
+func _unhandled_input(event: InputEvent):
+	if event.is_action_pressed("dialog"):
+		speeches[current].visible = false
+		current += 1
+		
+		if current < speeches.size():
+			speeches[current].visible = true
+		else:
+			queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

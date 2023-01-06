@@ -4,6 +4,8 @@ signal grounded_updated(is_grounded)
 
 const UP_DIRECTION = Vector2.UP
 
+export var health: float = 100 setget set_health
+export var charge: float = 0 setget set_charge
 export var speed = 800.0
 export var jump_strength = 1000.0
 export var double_jump_strength = 1200.0
@@ -17,6 +19,7 @@ export var deathParticle : PackedScene
 
 var jumps_made = 0
 var velocity = Vector2.ZERO
+var levelManager: Node2D
 
 #states
 var is_falling = false
@@ -33,13 +36,17 @@ var is_shooting_laser = false
 var shooting_time_start : int
 
 func _ready():
+	levelManager = get_tree().get_root().get_node("Level/level_manager")
+	
+	levelManager.healthBar.set_value(100)
+	levelManager.chargeBar.set_value(0)
+	
 	$IdleCollision.disabled = false
 	$JumpCollision.disabled = true
 	is_alive = true
-	$Laser2.visible = true	
+	$Laser2.visible = true
 	
 func _physics_process(delta):
-	
 	velocity.y += gravity * delta
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
 	
@@ -61,7 +68,7 @@ func _physics_process(delta):
 	# States
 	is_falling = velocity.y > 0.0 and not is_on_floor()
 	is_jumping = Input.is_action_just_pressed("jump") and is_on_floor()
-	is_double_jumping = Input.is_action_just_pressed("jump") and (is_falling or is_jumping or not is_on_floor()) and PlayerData.charge >= double_jump_charge
+	is_double_jumping = Input.is_action_just_pressed("jump") and (is_falling or is_jumping or not is_on_floor()) and charge >= double_jump_charge
 	is_jump_cancelled = Input.is_action_just_released("jump") and velocity.y < 0.0
 	is_idling = is_on_floor() and not (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_running = is_on_floor() and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
@@ -77,7 +84,7 @@ func _physics_process(delta):
 		jumps_made += 1
 		if jumps_made <= maximum_jumps:
 			velocity.y = -double_jump_strength
-			PlayerData.decrease_charge(double_jump_charge)
+			self.charge -= double_jump_charge
 			shake_camera(0.2, 15, 20, 0)
 			$Explosion.start_animation()
 			
@@ -106,13 +113,12 @@ func _physics_process(delta):
 	
 	
 	#Laser
-	if (Input.is_action_just_pressed("ShotTest") or Input.is_action_pressed("ShotTest")) and PlayerData.charge > 200 * laser_charge_rate:
+	if (Input.is_action_just_pressed("ShotTest") or Input.is_action_pressed("ShotTest")) and charge > 200 * laser_charge_rate:
 		shake_camera(0.2, 15, 25, 0)
 		if not is_shooting_laser:
 			$Laser2.shoot_laser(facing) 
 			is_shooting_laser = true
 			shooting_time_start = Time.get_ticks_msec()
-			
 	
 	if Input.is_action_just_released("ShotTest"):
 		if is_shooting_laser:
@@ -123,7 +129,7 @@ func _physics_process(delta):
 	if is_shooting_laser:
 		var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
 		if(shooting_time_elapsed > 100) : deduce_laser_charge()
-		if PlayerData.charge < shooting_time_elapsed * laser_charge_rate:
+		if charge < shooting_time_elapsed * laser_charge_rate:
 			$Laser2.stop_laser()
 			is_shooting_laser = false
 			deduce_laser_charge()
@@ -131,7 +137,7 @@ func _physics_process(delta):
 
 func deduce_laser_charge():
 	var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
-	PlayerData.decrease_charge(shooting_time_elapsed * laser_charge_rate)
+	self.charge -= shooting_time_elapsed * laser_charge_rate
 	shooting_time_start = Time.get_ticks_msec()
 	
 	
@@ -167,3 +173,21 @@ func kill(wait_time = 2.0):
 	yield(get_tree().create_timer(wait_time), "timeout")
 	queue_free()
 
+func set_charge(value: float):
+	charge = value
+	
+	if charge < 0:
+		charge = 0
+		
+	levelManager.chargeBar.set_value(charge)
+
+func set_health(value: float):
+	health = value
+	levelManager.healthBar.set_value(health)
+	
+	if health <= 0:
+		Die()
+
+func Die():
+	print("die")
+	levelManager.GameOver()

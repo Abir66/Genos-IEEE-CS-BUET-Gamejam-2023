@@ -1,5 +1,6 @@
 extends RayCast2D
 
+var damage: float = 2
 var is_casting := false setget set_is_casting
 var isShot= false
 # Called when the node enters the scene tree for the first time.
@@ -28,7 +29,7 @@ func _physics_process(delta):
 #		self.is_casting = not is_casting
 	
 	var cast_point = cast_to
-	print(cast_point)
+	# print(cast_point)
 	force_raycast_update()
 	$collisionParticle.emitting=is_colliding()
 	
@@ -56,6 +57,13 @@ func set_is_casting(cast: bool)->void:
 		
 	set_physics_process(is_casting)
 	
+
+func _process(delta):
+	var collider = get_collider()
+	
+	if is_casting and collider is CollisionObject2D:
+		if collider.collision_layer == 2:
+			collider.health -= damage
 
 
 func appear() -> void:
