@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Utils/Charge/assets/battery.png" type="Texture" id=1]
 [ext_resource path="res://src/Utils/Charge/Battery.gd" type="Script" id=2]
+[ext_resource path="res://Audio/heal.mp3" type="AudioStream" id=3]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -0.179192, -34.5879, 13.9728, -31.4813, 26.0539, -22.1617, 32, -11.8665, 34.5106, 1.13745, 30.3685, 15.8073, 20.1859, 27.1979, 11.9018, 32.0304, 0.511131, 34.6192, -10.8796, 32.8933, -23.4783, 26.5076, -32.4528, 14.5992, -34.2071, 0.156757, -33.1432, -11.6339, -27.2752, -22.1617, -13.9861, -31.4813 )
@@ -102,4 +103,8 @@ autoplay = "bouncing"
 anims/bouncing = SubResource( 3 )
 anims/picked = SubResource( 4 )
 
+[node name="heal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="heal" to="." method="_on_heal_finished"]
