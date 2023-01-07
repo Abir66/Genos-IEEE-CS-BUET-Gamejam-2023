@@ -5,17 +5,18 @@ func _ready():
 		var button = load("res://src/UI/LevelSelector/LevelButton.tscn").instance()
 		button.get_node("Label").text = "Level " + str(i+1);
 		button.level_no = i+1
+		
 		if(i >= GameData.max_level_reached):
 			button.get_node("TextureRect").modulate.a = 0.2
 			button.get_node("Label").modulate.a = 0.2
 			button.focus_mode = FOCUS_NONE
 			button.disabled = true
-		get_node("LevelSelectorPanel/GridContainer").add_child(button)
+		get_node("LevelSelectorPanel/LevelScroll/HBox/GridContainer").add_child(button)
 
 func update_levels():
 	print(GameData.max_level_reached)
 	var i:int = 1;
-	for button in get_node("LevelSelectorPanel/GridContainer").get_children():
+	for button in get_node("LevelSelectorPanel/LevelScroll/HBox/GridContainer").get_children():
 		button.level_no = i
 		if(i <= GameData.max_level_reached):
 			button.get_node("TextureRect").modulate.a = 1

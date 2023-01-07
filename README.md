@@ -10,6 +10,7 @@
 - Public variables
 
   - is_running:bool
+  - play_audio:bool
 
 - Signals
 
@@ -20,8 +21,7 @@
   - next_dialogue: To show the next dialogue
   - skip_dialogue: To skip the remaining dialogues
 
-
 #####to make sound working#####
 
-- need some modification... go to audio folder...you would see import tab on the upper left,,, 
-make every sound loop off(except lased related) and reimport them
+- need some modification... go to audio folder...you would see import tab to the upper left on your screen,,,
+  make every sound loop off(except laser related) and reimport them
