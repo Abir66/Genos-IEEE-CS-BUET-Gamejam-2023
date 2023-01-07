@@ -9,6 +9,7 @@ onready var black= $Control/ColorRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = false
 	pass # Replace with function body.
 
 
@@ -25,7 +26,3 @@ func change_scene(path, delay=0.5):
 	yield(animation_player,"animation_finished")
 	
 	emit_signal("scene_changed")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
