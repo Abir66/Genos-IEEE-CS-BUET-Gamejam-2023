@@ -75,6 +75,16 @@ func _physics_process(delta):
 	is_grounded = is_on_floor()
 	
 	
+	
+	#sounds.................
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		$jump.play()
+		$jumpSoundTimer.start(0.2)
+	if Input.is_action_just_pressed("jump") and (is_falling or is_jumping)  and not is_on_floor() and charge >= double_jump_charge :
+		$doubleJump.play()
+		$doubleJumpTimer.start(0.2)
+	
+	
 	#Jumps
 	if is_jumping:
 		jumps_made += 1
@@ -192,3 +202,14 @@ func decrease_health(value : float): set_health(health - value)
 func get_health() : return health
 func get_charge() : return charge
 func got_battery(charge) : set_charge(self.charge + charge)
+
+
+
+
+
+func _on_jumpSoundTimer_timeout():
+	$jump.stop()
+
+
+func _on_doubleJumpTimer_timeout():
+	$doubleJump.stop()
