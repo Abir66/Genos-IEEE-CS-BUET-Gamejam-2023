@@ -62,18 +62,18 @@ centered = false
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="UI" instance=ExtResource( 6 )]
-margin_left = -244.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = 53.0
+margin_left = -410.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = 80.0
 
 [node name="ChargeBar" parent="UI" instance=ExtResource( 7 )]
 anchor_left = 0.0
 anchor_right = 0.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 244.0
-margin_bottom = 53.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 410.0
+margin_bottom = 80.0
 
 [node name="DialogueManager" parent="." instance=ExtResource( 10 )]
 
