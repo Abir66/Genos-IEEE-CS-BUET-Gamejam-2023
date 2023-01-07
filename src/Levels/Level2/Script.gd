@@ -20,10 +20,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	# Have to remove this
-	if Input.is_action_just_pressed("kill"):
-		get_tree().quit()
-		
 	check_lose_condition()
 	check_win_condition()		
 
@@ -43,11 +39,16 @@ func _on_Player_player_died():
 #	$Camera2D.custom_viewport = $Player/Camera2D.get_viewport()
 	
 
+# Caution : Check if player is alive before using $Player
 func check_win_condition():
-	if $Player.charge < 80:
-		emit_signal("level_clear")
+	if is_player_alive:
+		if $Player.charge < 80:
+			emit_signal("level_clear")
 
 
 func check_lose_condition():
 	if  not is_player_alive:
 		emit_signal("level_lost")	
+
+func _on_Player_invisible_tile_collision():
+	$Player.kill()
