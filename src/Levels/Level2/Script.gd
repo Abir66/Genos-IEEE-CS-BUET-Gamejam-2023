@@ -44,7 +44,8 @@ func _on_Player_player_died():
 	
 
 func check_win_condition():
-	pass
+	if $Player.charge < 80:
+		emit_signal("level_clear")
 
 
 func check_lose_condition():
