@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Levels/Level01/Script.gd" type="Script" id=2]
-[ext_resource path="res://Enemy/enemyRobot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Enemy/enemyRobot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://PrefabScenes/LevelManager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Utils/Charge/Battery.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=6]

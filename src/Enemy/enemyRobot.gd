@@ -7,6 +7,9 @@ export var left_range=400.0
 export var transition_speed=3
 export var health: float = 100 setget set_health
 export var uniqueName:  String = "Enemy"
+export var intervalTime=3
+export var ShootTime=0.7
+
 
 const FLOOR_NORMAL: = Vector2.UP
 var _velocity:Vector2 = Vector2.ZERO
@@ -23,7 +26,14 @@ export var deathParticle : PackedScene
 signal enemy_died
 
 
+func give_interval_time():
+	$Laser.intervalTime=self.intervalTime
+func give_shoot_time():
+	$Laser.shootTime=self.ShootTime
+
 func _ready():
+	self.give_interval_time()  #give the laser its variable times.....
+	self.give_shoot_time()
 	
 	$AnimatedSprite.play("walk")
 	$AnimatedSprite.flip_h = true

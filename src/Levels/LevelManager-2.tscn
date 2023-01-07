@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Levels/LevelManager-2.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/Levels/ParallaxScrollingAssets/City/1.png" type="Texture" id=5]
 [ext_resource path="res://src/Utils/ProgressBar/HealthBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Utils/ProgressBar/ChargeBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Levels/Pause.gd" type="Script" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -25,12 +26,6 @@ glow_high_quality = true
 script = ExtResource( 1 )
 
 [node name="LevelContainer" type="Node2D" parent="."]
-
-[node name="PauseMenu" type="CanvasLayer" parent="."]
-layer = 100
-visible = false
-
-[node name="PauseMenuPanel" parent="PauseMenu" instance=ExtResource( 2 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -79,3 +74,20 @@ margin_bottom = 53.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Pause" type="Control" parent="PauseMenu"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="BlackOverlay" type="ColorRect" parent="PauseMenu/Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0588235, 0.054902, 0.054902, 0.639216 )
+
+[node name="PauseMenuPanel" parent="PauseMenu/Pause" instance=ExtResource( 2 )]

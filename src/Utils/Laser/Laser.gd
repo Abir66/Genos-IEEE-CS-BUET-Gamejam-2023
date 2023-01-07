@@ -15,12 +15,19 @@ func shoot_laser(facing):
 	else : 
 		cast_to.x = 3000
 		$CastingParticle.process_material.direction.x=1
-	
+
 	self.is_casting = true
+	$laserStartAudio.play()
+	
+	$startAudioTimer.start(0.3)
 	
 
 func stop_laser():
 	self.is_casting = false
+	$laserContinueAudio.stop()
+	if $laserStartAudio.playing:
+		$laserStartAudio.stop()
+		
 
 func change_facing(facing):
 	if facing == "left" : cast_to.x = -3000
@@ -85,3 +92,11 @@ func disappear()->void:
 
 func _on_Timer_timeout():
 	self.set_is_casting(false)
+
+
+func _on_startAudioTimer_timeout():
+	if $laserStartAudio.playing:
+		$laserContinueAudio.play()
+	$laserStartAudio.stop()
+	
+	

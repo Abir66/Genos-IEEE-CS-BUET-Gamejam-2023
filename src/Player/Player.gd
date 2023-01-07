@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal grounded_updated(is_grounded)
 signal set_charge(charge_value)
 signal set_health(health_value)
+signal player_died
 
 const UP_DIRECTION = Vector2.UP
 
@@ -72,6 +73,16 @@ func _physics_process(delta):
 	is_idling = is_on_floor() and not (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_running = is_on_floor() and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_grounded = is_on_floor()
+	
+	
+	
+	#sounds.................
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		$jump.play()
+		$jumpSoundTimer.start(0.2)
+	if Input.is_action_just_pressed("jump") and (is_falling or is_jumping)  and not is_on_floor() and charge >= double_jump_charge :
+		$doubleJump.play()
+		$doubleJumpTimer.start(0.2)
 	
 	
 	#Jumps
@@ -168,8 +179,9 @@ func kill(wait_time = 2.0):
 	self.visible = false
 	$IdleCollision.disabled = true
 	$JumpCollision.disabled = true
+	emit_signal("player_died")
 
-	yield(get_tree().create_timer(wait_time), "timeout")
+	#yield(get_tree().create_timer(wait_time), "timeout")
 	queue_free()
 
 func set_charge(value: float):
@@ -190,3 +202,14 @@ func decrease_health(value : float): set_health(health - value)
 func get_health() : return health
 func get_charge() : return charge
 func got_battery(charge) : set_charge(self.charge + charge)
+
+
+
+
+
+func _on_jumpSoundTimer_timeout():
+	$jump.stop()
+
+
+func _on_doubleJumpTimer_timeout():
+	$doubleJump.stop()

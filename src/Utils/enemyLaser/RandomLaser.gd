@@ -4,8 +4,8 @@ var damage: float = 100
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var intervalTime =3
-export var shootTime=0.7
+var intervalTime =3
+var shootTime=0.7
 var is_casting := false setget set_is_casting
 var isShot= false 
 # Called when the node enters the scene tree for the first time.
@@ -36,6 +36,8 @@ func _process(delta):
 	
 	if isShot==true and is_casting==false and get_parent().get_parent().is_processing():
 		self.is_casting = true
+		$laserStart.play()
+		$soundTimer.start(0.4)
 		$Timer.start(shootTime)
 	
 	
@@ -104,6 +106,10 @@ func disappear()->void:
 
 func _on_Timer_timeout():
 	self.set_is_casting(false)
+	#if $laserContinue.playing:
+		#$laserContinue.stop()
+	if $laserStart.playing:
+		$laserStart.stop()
 	self.isShot=false
 
 
@@ -111,3 +117,8 @@ func _on_ShootTimer_timeout():
 	self.isShot=true
 	$ShootTimer.start(intervalTime)
 	
+
+
+func _on_soundTimer_timeout():
+	$laserStart.stop()
+	#$laserContinue.play()
