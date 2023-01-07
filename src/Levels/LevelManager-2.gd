@@ -1,14 +1,16 @@
 extends Node2D
 
 var level : Node
+var level_no : int
 
 func _ready():
-	load_level("Level02")
+	load_level(GameData.level_to_load)
 	
-func load_level(level_name):
 	
-	if is_instance_valid(level) and level != null :level.queue_free()
-	level = load("res://src/Levels/" + level_name + "/Scene.tscn").instance()
+func load_level(level_no):
+	self.level_no = level_no
+	if is_instance_valid(level) : level.queue_free()
+	level = load("res://src/Levels/Level" + String(level_no) + "/Scene.tscn").instance()
 	level.position = Vector2.ZERO
 	$LevelContainer.add_child(level)
 	
@@ -22,20 +24,21 @@ func load_level(level_name):
 	
 	
 func restart_level():
-	pass
-	
-	
-func level_lost():
-	pass
-	
-func level_win():
-	pass
-	
+	load_level(GameData.level_to_load)
+		
 func next_level():
-	load_level("Level02")
+	if GameData.has_next_level() : 
+		GameData.set_next_level()
+		load_level(GameData.level_to_load)
+	
 
 func on_level_clear():
+	GameData.level_complete(level_no)
 	next_level()
+
+func on_level_lost():
+	pass
+	
 
 # Signals
 func set_health(health_value):
