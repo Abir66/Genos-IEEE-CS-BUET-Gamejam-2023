@@ -75,19 +75,23 @@ margin_bottom = 53.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="PauseMenu" type="CanvasLayer" parent="."]
+[node name="InGameMenu" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="Pause" type="Control" parent="PauseMenu"]
+[node name="Pause" type="Control" parent="InGameMenu"]
 pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
 
-[node name="BlackOverlay" type="ColorRect" parent="PauseMenu/Pause"]
+[node name="BlackOverlay" type="ColorRect" parent="InGameMenu/Pause"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0588235, 0.054902, 0.054902, 0.639216 )
 
-[node name="PauseMenuPanel" parent="PauseMenu/Pause" instance=ExtResource( 2 )]
+[node name="PauseMenuPanel" parent="InGameMenu/Pause" instance=ExtResource( 2 )]
+
+[connection signal="exit_button" from="InGameMenu/Pause/PauseMenuPanel" to="." method="_on_PauseMenuPanel_exit_button"]
+[connection signal="restart_button" from="InGameMenu/Pause/PauseMenuPanel" to="." method="_on_PauseMenuPanel_restart_button"]
+[connection signal="resume_button" from="InGameMenu/Pause/PauseMenuPanel" to="." method="_on_PauseMenuPanel_resume_button"]
