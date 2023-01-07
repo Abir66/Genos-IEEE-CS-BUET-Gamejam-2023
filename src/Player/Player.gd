@@ -4,6 +4,7 @@ signal grounded_updated(is_grounded)
 signal set_charge(charge_value)
 signal set_health(health_value)
 signal player_died
+signal invisible_tile_collision
 
 const UP_DIRECTION = Vector2.UP
 
@@ -47,6 +48,10 @@ func _ready():
 	$Laser2.visible = true
 	
 func _physics_process(delta):
+	
+	if (is_on_wall() or is_on_floor() or is_on_ceiling()) and self.get_last_slide_collision().collider != null and self.get_last_slide_collision().collider.name == "Invisible":
+		emit_signal("invisible_tile_collision")
+	
 	velocity.y += gravity * delta
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
 	
