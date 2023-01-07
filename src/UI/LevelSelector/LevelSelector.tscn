@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/fonts/UITitleFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://src/UI/LevelSelector/LevelButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/LevelSelector/LevelSelector.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/UIButtonFont.tres" type="DynamicFont" id=4]
 
@@ -35,55 +34,14 @@ margin_right = -20.0
 margin_bottom = -70.0
 scroll_horizontal_enabled = false
 
-[node name="GridContainer" type="GridContainer" parent="LevelSelectorPanel/LevelScroll"]
-margin_right = 984.0
-margin_bottom = 410.0
+[node name="GridContainer" type="GridContainer" parent="LevelSelectorPanel"]
+margin_left = 200.0
+margin_top = 120.0
+margin_right = 1720.0
+margin_bottom = 900.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelButton1" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_right = 243.0
-next_scene_path = "res://src/Levels/Level01/Scene.tscn"
-
-[node name="LevelButton2" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_left = 247.0
-margin_right = 490.0
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-
-[node name="LevelButton3" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_left = 494.0
-margin_right = 737.0
-
-[node name="LevelButton4" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_left = 741.0
-margin_right = 984.0
-
-[node name="LevelButton5" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_top = 204.0
-margin_right = 243.0
-margin_bottom = 404.0
-
-[node name="LevelButton6" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_left = 247.0
-margin_top = 204.0
-margin_right = 490.0
-margin_bottom = 404.0
-
-[node name="LevelButton7" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_left = 494.0
-margin_top = 204.0
-margin_right = 737.0
-margin_bottom = 404.0
-
-[node name="LevelButton8" parent="LevelSelectorPanel/LevelScroll/GridContainer" instance=ExtResource( 2 )]
-margin_left = 741.0
-margin_top = 204.0
-margin_right = 984.0
-margin_bottom = 404.0
+columns = 6
 
 [node name="BackButton" type="Button" parent="LevelSelectorPanel"]
 anchor_top = 1.0
