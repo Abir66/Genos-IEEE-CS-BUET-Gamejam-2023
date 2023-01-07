@@ -20,7 +20,7 @@ func _ready():
 #	pass
 
 func RetryButtonClick():
-	pass # pore :3
+	get_tree().change_scene("res://src/Levels/LevelManager-2.tscn")
 
 func ExitButtonClick():
 	get_tree().change_scene("res://src/UI/MainMenu/MainMenu.tscn")
