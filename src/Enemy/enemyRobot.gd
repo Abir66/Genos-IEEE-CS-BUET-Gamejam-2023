@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_wall():
 		
 		#print(self.get_last_slide_collision().collider.name)
-		if not self.get_last_slide_collision().collider.name == "Player":
+		if self.get_last_slide_collision().collider != null and not self.get_last_slide_collision().collider.name == "Player":
 			_velocity.x *= -1.0
 			$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 			right_going = not right_going	

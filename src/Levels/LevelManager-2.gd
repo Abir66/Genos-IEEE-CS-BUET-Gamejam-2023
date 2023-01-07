@@ -7,7 +7,7 @@ func _ready():
 	load_level(2)
 	
 	
-func load_level(level_no):
+func load_level(level_no, play_dialogues = true):
 	self.level_no = level_no
 	if is_instance_valid(level) : level.queue_free()
 	level = load("res://src/Levels/Level" + String(level_no) + "/Scene.tscn").instance()
@@ -26,7 +26,16 @@ func load_level(level_no):
 	GameData.level_lost = false
 	$InGameMenu/Pause.visible = false
 	
+	$DialogueManager.set_dialogue(level.dialogues)
 	
+	if play_dialogues : $DialogueManager.start_dialogue()
+	
+	
+func _input(event):
+	if Input.is_action_pressed("next_dialogue") and $DialogueManager.is_running:
+		$DialogueManager._next_dialogue()
+	elif Input.is_action_pressed("skip_dialogue") and $DialogueManager.is_running:
+		$DialogueManager._stop_dialogue()
 	
 func restart_level():
 	load_level(GameData.level_to_load)
@@ -43,9 +52,8 @@ func on_level_clear():
 
 func on_level_lost():
 	GameData.level_lost = true
-	#pause and show game over menu
-	next_level()
-	
+	$InGameMenu/Pause.visible = false
+	$InGameMenu/LevelLost.visible = true
 	
 
 # Signals
@@ -54,21 +62,29 @@ func set_health(health_value):
 	
 func set_charge(charge_value):
 	$UI/ChargeBar.set_value(charge_value)
-
-
-func _on_PauseMenuPanel_exit_button():
-	get_tree().paused = false
-	$InGameMenu/Pause.visible = false
-	# need to add scene change to main menu
 	
-
-
-func _on_PauseMenuPanel_restart_button():
-	get_tree().paused = false
-	$InGameMenu/Pause.visible = false
-	restart_level()
-
-
+	
 func _on_PauseMenuPanel_resume_button():
 	get_tree().paused = false
 	$InGameMenu/Pause.visible = false
+	$InGameMenu/LevelLost.visible = false
+
+
+func _on_Menu_restart_button():
+	get_tree().paused = false
+	$InGameMenu/Pause.visible = false
+	$InGameMenu/LevelLost.visible = false
+	restart_level()
+
+
+func _on_Menu_resume_button():
+	get_tree().paused = false
+	$InGameMenu/Pause.visible = false
+	$InGameMenu/LevelLost.visible = false
+
+
+func _on_Menu_exit_button():
+	get_tree().paused = false
+	$InGameMenu/Pause.visible = false
+	$InGameMenu/LevelLost.visible = false
+	# need to add scene change to main menu

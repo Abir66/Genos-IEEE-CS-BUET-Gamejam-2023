@@ -3,10 +3,7 @@ extends CanvasLayer
 signal dialogue_start
 signal dialogue_stop
 
-var _dialogues = [
-	"Welcome to GenJam!", 
-	"You will be following my instructions from here onwards:)", 
-	"As I was saying, This is your first task. Its' very simple. Just jump over the enemies."]
+var _dialogues = []
 var _curr_no = 0
 onready var _dialogue_label = $ColorRect/Dialogue
 onready var _dialogue_back = $ColorRect
@@ -40,15 +37,3 @@ func _next_dialogue():
 		_dialogue_label.show_dialogue(_dialogues[_curr_no])
 	else:
 		_stop_dialogue()
-		
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("start_dialogue"):
-		if !is_running:
-			start_dialogue()
-	elif Input.is_action_just_pressed("next_dialogue"):
-		if is_running:
-			_next_dialogue()
-	elif Input.is_action_just_pressed("skip_dialogue"):
-		if is_running:
-			_stop_dialogue()
-		
