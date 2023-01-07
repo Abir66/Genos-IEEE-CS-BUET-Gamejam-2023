@@ -343,10 +343,12 @@ position = Vector2( -2, -24 )
 
 [node name="jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 26 )
+volume_db = -15.0
 pitch_scale = 1.5
 
 [node name="doubleJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 28 )
+volume_db = -15.0
 
 [connection signal="grounded_updated" from="." to="Camera2D" method="_on_Player_grounded_updated"]
 [connection signal="timeout" from="Explosion/Timer" to="Explosion" method="_on_Timer_timeout"]
