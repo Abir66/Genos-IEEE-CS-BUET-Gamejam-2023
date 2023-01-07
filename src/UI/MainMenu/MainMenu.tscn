@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/UITitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/UI/MainMenu/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/UIButtonFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/UITheme/UITheme.tres" type="Theme" id=4]
+
+[sub_resource type="Theme" id=1]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="MainMenuPanel" type="Panel" parent="."]
@@ -28,10 +32,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -50.0
+margin_left = -100.0
 margin_top = -63.0
-margin_right = 50.0
+margin_right = 100.0
 margin_bottom = -27.0
+theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Start"
 
@@ -40,10 +45,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -50.0
+margin_left = -100.0
 margin_top = -18.0
-margin_right = 50.0
+margin_right = 100.0
 margin_bottom = 18.0
+theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Credits"
 __meta__ = {
@@ -55,10 +61,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -50.0
+margin_left = -100.0
 margin_top = 27.0
-margin_right = 50.0
+margin_right = 100.0
 margin_bottom = 63.0
+theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Exit"
 
