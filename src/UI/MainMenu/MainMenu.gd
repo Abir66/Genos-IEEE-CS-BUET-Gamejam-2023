@@ -8,14 +8,16 @@ func _ready():
 	
 	startButton.connect("pressed", self, "StartButtonClick")
 	exitButton.connect("pressed", self, "ExitButtonClick")
-
+	
+	get_node("LevelSelector").visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 func StartButtonClick():
-	get_tree().change_scene("res://src/UI/LevelSelector/LevelSelector.tscn")
+	get_node("LevelSelector").visible = true
+#	get_tree().change_scene("res://src/UI/LevelSelector/LevelSelector.tscn")
 
 func ExitButtonClick():
 	get_tree().quit()
