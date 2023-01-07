@@ -7,6 +7,7 @@ func _ready():
 		button.level_no = i+1
 		if(i >= GameData.max_level_reached):
 			button.get_node("TextureRect").modulate.a = 0.2
+			button.get_node("Label").modulate.a = 0.2
 		get_node("LevelSelectorPanel/GridContainer").add_child(button)
 
 func _on_BackButton_pressed() -> void:
