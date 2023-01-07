@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://src/Player/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://src/Player/assets/Explosion/1_15.png" type="Texture" id=2]
@@ -25,7 +25,9 @@
 [ext_resource path="res://src/Player/assets/Explosion/1_5.png" type="Texture" id=23]
 [ext_resource path="res://src/Player/assets/Explosion/1_4.png" type="Texture" id=24]
 [ext_resource path="res://src/Utils/DeathParticles/DeathParticles.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Audio/jump.mp3" type="AudioStream" id=26]
 [ext_resource path="res://src/Utils/Laser/Laser.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Audio/doubleJump.mp3" type="AudioStream" id=28]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -339,5 +341,18 @@ script = ExtResource( 1 )
 [node name="Laser2" parent="." instance=ExtResource( 27 )]
 position = Vector2( -2, -24 )
 
+[node name="jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
+pitch_scale = 1.5
+
+[node name="jumpSoundTimer" type="Timer" parent="."]
+
+[node name="doubleJump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 28 )
+
+[node name="doubleJumpTimer" type="Timer" parent="."]
+
 [connection signal="grounded_updated" from="." to="Camera2D" method="_on_Player_grounded_updated"]
 [connection signal="timeout" from="Explosion/Timer" to="Explosion" method="_on_Timer_timeout"]
+[connection signal="timeout" from="jumpSoundTimer" to="." method="_on_jumpSoundTimer_timeout"]
+[connection signal="timeout" from="doubleJumpTimer" to="." method="_on_doubleJumpTimer_timeout"]
