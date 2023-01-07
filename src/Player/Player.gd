@@ -129,7 +129,7 @@ func _physics_process(delta):
 			is_shooting_laser = true
 			shooting_time_start = Time.get_ticks_msec()
 	
-	if Input.is_action_just_released("ShotTest"):
+	if Input.is_action_just_released("ShotTest") or not Input.is_action_pressed("ShotTest"):
 		if is_shooting_laser:
 			$Laser2.stop_laser()
 			is_shooting_laser = false
