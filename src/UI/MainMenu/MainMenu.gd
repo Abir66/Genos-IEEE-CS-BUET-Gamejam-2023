@@ -3,21 +3,17 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var startButton = get_node("StartButton")
-	var exitButton = get_node("ExitButton")
-	
-	startButton.connect("pressed", self, "StartButtonClick")
-	exitButton.connect("pressed", self, "ExitButtonClick")
-	
 	get_node("LevelSelector").visible = false
+	get_node("Credits").visible = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
-func StartButtonClick():
+func _on_StartButton_pressed() -> void:
 	get_node("LevelSelector").visible = true
-#	get_tree().change_scene("res://src/UI/LevelSelector/LevelSelector.tscn")
 
-func ExitButtonClick():
+
+func _on_CreditsButton_pressed() -> void:
+	get_node("Credits").visible = true
+
+
+func _on_ExitButton_pressed() -> void:
 	get_tree().quit()
