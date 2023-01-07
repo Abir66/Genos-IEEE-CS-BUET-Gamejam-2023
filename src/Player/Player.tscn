@@ -345,14 +345,10 @@ position = Vector2( -2, -24 )
 stream = ExtResource( 26 )
 pitch_scale = 1.5
 
-[node name="jumpSoundTimer" type="Timer" parent="."]
-
 [node name="doubleJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 28 )
 
-[node name="doubleJumpTimer" type="Timer" parent="."]
-
 [connection signal="grounded_updated" from="." to="Camera2D" method="_on_Player_grounded_updated"]
 [connection signal="timeout" from="Explosion/Timer" to="Explosion" method="_on_Timer_timeout"]
-[connection signal="timeout" from="jumpSoundTimer" to="." method="_on_jumpSoundTimer_timeout"]
-[connection signal="timeout" from="doubleJumpTimer" to="." method="_on_doubleJumpTimer_timeout"]
+[connection signal="finished" from="jump" to="." method="_on_jump_finished"]
+[connection signal="finished" from="doubleJump" to="." method="_on_doubleJump_finished"]
