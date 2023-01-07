@@ -8,7 +8,7 @@ var _curr_no = 0
 onready var _dialogue_label = $ColorRect/Dialogue
 onready var _dialogue_back = $ColorRect
 export var is_running:bool = false
-
+export var play_audio:bool = false
 func _ready() -> void:
 	_dialogue_label.visible = false
 	is_running = false
@@ -23,8 +23,14 @@ func start_dialogue():
 	_dialogue_back.visible = true
 	is_running = true
 	_dialogue_label.visible = true
-	_dialogue_label.show_dialogue(_dialogues[_curr_no])
+	_show_dialogue()
 
+func _show_dialogue():
+	_dialogue_label.show_dialogue(_dialogues[_curr_no])
+	var speed = 0.9
+	if play_audio:
+		yield($TextToSpeech.say(_dialogues[_curr_no],  TextToSpeech.VOICE_SLT, speed), "completed")
+	
 func _stop_dialogue():
 	_dialogue_back.visible = false
 	_dialogue_label.visible = false
@@ -34,6 +40,6 @@ func _stop_dialogue():
 func _next_dialogue():
 	if _curr_no+1 < _dialogues.size():
 		_curr_no+=1;
-		_dialogue_label.show_dialogue(_dialogues[_curr_no])
+		_show_dialogue()
 	else:
 		_stop_dialogue()
