@@ -9,7 +9,11 @@ func _ready():
 	
 func load_level(level_no, play_dialogues = true):
 	self.level_no = level_no
-	if is_instance_valid(level) : level.queue_free()
+	if is_instance_valid(level) :
+		level.queue_free()
+		$Transition.fade_in()
+		yield(get_tree().create_timer(1), "timeout")
+		$Transition.fade_out()
 	level = load("res://src/Levels/Level" + String(level_no) + "/Scene.tscn").instance()
 	level.position = Vector2.ZERO
 	$LevelContainer.add_child(level)
@@ -26,9 +30,9 @@ func load_level(level_no, play_dialogues = true):
 	GameData.level_lost = false
 	$InGameMenu/Pause.visible = false
 	
-	$DialogueManager.set_dialogue(level.dialogues)
+	#$DialogueManager.set_dialogue(level.dialogues)
 	
-	if play_dialogues : $DialogueManager.start_dialogue()
+	#if play_dialogues : $DialogueManager.start_dialogue()
 	
 	
 func _input(event):
@@ -48,6 +52,7 @@ func next_level():
 
 func on_level_clear():
 	GameData.level_complete(level_no)
+	print("level cleared")
 	next_level()
 
 func on_level_lost():
