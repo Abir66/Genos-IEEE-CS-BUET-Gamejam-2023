@@ -10,7 +10,7 @@ func _on_button_up() -> void:
 		print("level_to_load="+ String(level_no))
 		get_tree().change_scene("res://src/Levels/LevelManager-2.tscn")
 	else:
-		print(level_no)
+		print(level_no) 
 #
 #func _get_configuration_warning() -> String:
 #	return "The property Next Level can't be empty" if next_scene_path == "" else ""
