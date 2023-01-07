@@ -23,22 +23,32 @@ align = 1
 valign = 1
 
 [node name="LevelScroll" type="ScrollContainer" parent="LevelSelectorPanel"]
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 120.0
-margin_right = -20.0
-margin_bottom = -70.0
+anchor_bottom = 0.5
+margin_top = -390.0
+margin_bottom = 390.0
 scroll_horizontal_enabled = false
 
-[node name="GridContainer" type="GridContainer" parent="LevelSelectorPanel"]
-margin_left = 200.0
-margin_top = 120.0
-margin_right = 1720.0
-margin_bottom = 900.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 6
+[node name="HBox" type="HBoxContainer" parent="LevelSelectorPanel/LevelScroll"]
+margin_right = 1928.0
+
+[node name="ColorRect" type="ColorRect" parent="LevelSelectorPanel/LevelScroll/HBox"]
+margin_right = 580.0
+rect_min_size = Vector2( 580, 0 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="GridContainer" type="GridContainer" parent="LevelSelectorPanel/LevelScroll/HBox"]
+margin_left = 584.0
+margin_right = 1344.0
+rect_min_size = Vector2( 760, 0 )
+columns = 2
+
+[node name="ColorRect2" type="ColorRect" parent="LevelSelectorPanel/LevelScroll/HBox"]
+margin_left = 1348.0
+margin_right = 1928.0
+rect_min_size = Vector2( 580, 0 )
+color = Color( 1, 1, 1, 0 )
 
 [node name="BackButton" type="Button" parent="LevelSelectorPanel"]
 anchor_top = 1.0
