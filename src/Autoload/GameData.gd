@@ -14,6 +14,13 @@ func level_complete(level_no:int):
 		max_level_reached = level_no
 	save_data()
 	
+func has_next_level():
+	if level_to_load + 1 > total_levels: return false
+	return true
+	
+func set_next_level():
+	if level_to_load + 1 <= total_levels: level_to_load += 1 
+	
 func save_data():
 	var file = File.new()
 	file.open(SAVE_FILE,File.WRITE)
