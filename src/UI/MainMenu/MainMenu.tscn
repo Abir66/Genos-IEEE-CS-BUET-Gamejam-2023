@@ -9,7 +9,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="Title" type="Label" parent="."]
+[node name="MainMenuPanel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="MainMenuPanel"]
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.172
@@ -18,11 +22,8 @@ custom_fonts/font = ExtResource( 1 )
 text = "Rebellious Bot"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="StartButton" type="Button" parent="."]
+[node name="StartButton" type="Button" parent="MainMenuPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -34,7 +35,7 @@ margin_bottom = -27.0
 custom_fonts/font = ExtResource( 3 )
 text = "Start"
 
-[node name="CreditsButton" type="Button" parent="."]
+[node name="CreditsButton" type="Button" parent="MainMenuPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -49,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="MainMenuPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
