@@ -14,7 +14,6 @@ margin_bottom = 200.0
 rect_min_size = Vector2( 0, 200 )
 size_flags_horizontal = 3
 script = ExtResource( 3 )
-next_scene_path = "res://src/Levels/Level01/World.tscn"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
