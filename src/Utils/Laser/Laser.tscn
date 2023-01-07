@@ -127,9 +127,11 @@ one_shot = true
 
 [node name="laserStartAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -15.0
 
 [node name="laserContinueAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -15.0
 pitch_scale = 0.8
 
 [node name="startAudioTimer" type="Timer" parent="."]
