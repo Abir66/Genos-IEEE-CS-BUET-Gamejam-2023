@@ -61,3 +61,7 @@ margin_right = 50.0
 margin_bottom = 63.0
 custom_fonts/font = ExtResource( 3 )
 text = "Exit"
+
+[connection signal="pressed" from="MainMenuPanel/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="MainMenuPanel/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="MainMenuPanel/ExitButton" to="." method="_on_ExitButton_pressed"]

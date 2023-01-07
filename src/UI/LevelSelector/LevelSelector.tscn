@@ -49,3 +49,5 @@ margin_right = 85.0
 margin_bottom = -20.0
 custom_fonts/font = ExtResource( 4 )
 text = "Back"
+
+[connection signal="pressed" from="LevelSelectorPanel/BackButton" to="." method="_on_BackButton_pressed"]

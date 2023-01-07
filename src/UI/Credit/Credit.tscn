@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/fonts/UITitleFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/UI/Credit/Credit.gd" type="Script" id=3]
 
-[node name="Control" type="Control"]
+[node name="Credits" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -31,3 +31,5 @@ margin_right = 85.0
 margin_bottom = -20.0
 custom_fonts/font = ExtResource( 1 )
 text = "Back"
+
+[connection signal="pressed" from="CreditPanel/BackButton" to="." method="_on_BackButton_pressed"]
