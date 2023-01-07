@@ -8,7 +8,6 @@ extends Node2D
 signal level_clear
 signal set_charge
 signal set_health
-signal level_lost
 
 var camera : Camera2D
 
@@ -28,13 +27,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	# Have to remove this
 	if Input.is_action_just_pressed("kill"):
 		get_tree().quit()
-		
-	check_lose_condition()
-	check_win_condition()		
+		emit_signal("level_clear")
+		print("signal emitted")
 
 func _on_Player_set_charge(charge_value):
 	emit_signal("set_charge", charge_value)
@@ -49,11 +45,3 @@ func _on_Player_player_died():
 	$Camera2D.position = $Player/Camera2D.position
 	$Camera2D.custom_viewport = $Player/Camera2D.get_viewport()
 	
-
-func check_win_condition():
-	pass
-
-
-func check_lose_condition():
-	if $Player.charge < 50 :
-		emit_signal("level_lost")	
