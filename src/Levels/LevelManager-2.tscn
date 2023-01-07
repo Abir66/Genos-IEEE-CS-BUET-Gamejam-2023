@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Levels/LevelManager-2.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/Levels/Pause.gd" type="Script" id=8]
 [ext_resource path="res://src/UI/LevelLostMenu/Scene.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/DialogueManager/DialogueManager.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Utils/Transition/Transition.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -109,6 +110,8 @@ anchor_bottom = 1.0
 color = Color( 0.0588235, 0.054902, 0.054902, 0.639216 )
 
 [node name="PauseMenuPanel" parent="InGameMenu/LevelLost" instance=ExtResource( 9 )]
+
+[node name="Transition" parent="." instance=ExtResource( 11 )]
 
 [connection signal="exit_button" from="InGameMenu/Pause/PauseMenuPanel" to="." method="_on_Menu_exit_button"]
 [connection signal="restart_button" from="InGameMenu/Pause/PauseMenuPanel" to="." method="_on_Menu_restart_button"]

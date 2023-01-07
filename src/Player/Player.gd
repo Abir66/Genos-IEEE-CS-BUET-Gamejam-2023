@@ -73,8 +73,7 @@ func _physics_process(delta):
 	is_idling = is_on_floor() and not (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_running = is_on_floor() and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_grounded = is_on_floor()
-	
-	
+		
 	
 	#sounds.................
 	if Input.is_action_just_pressed("jump") and is_on_floor():
