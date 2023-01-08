@@ -41,14 +41,18 @@ func _on_Player_player_died():
 
 # Caution : Check if player is alive before using $Player
 func check_win_condition():
-	if is_player_alive:
-		if $Player.charge < 80:
-			emit_signal("level_clear")
+	pass
 
 
 func check_lose_condition():
 	if  not is_player_alive:
 		emit_signal("level_lost")	
 
-func _on_Player_invisible_tile_collision():
+
+
+func _on_Player_tile_accept():
+	emit_signal("level_clear")
+
+
+func _on_Player_tile_reject():
 	$Player.kill()

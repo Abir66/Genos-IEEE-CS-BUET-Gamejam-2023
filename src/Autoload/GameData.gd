@@ -6,6 +6,7 @@ var level_to_load:int = 2
 var max_level_reached:int = 1
 export var total_levels:int = 10
 var level_lost = false
+var showing_dialogue = false
 
 func _ready() -> void:
 	load_data()

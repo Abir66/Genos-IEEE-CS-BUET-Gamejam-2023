@@ -4,7 +4,8 @@ signal grounded_updated(is_grounded)
 signal set_charge(charge_value)
 signal set_health(health_value)
 signal player_died
-signal invisible_tile_collision
+signal tile_reject
+signal tile_accept
 
 const UP_DIRECTION = Vector2.UP
 
@@ -49,25 +50,33 @@ func _ready():
 	
 func _physics_process(delta):
 	
-	if (is_on_wall() or is_on_floor() or is_on_ceiling()) and self.get_last_slide_collision().collider != null and self.get_last_slide_collision().collider.name == "Invisible":
-		emit_signal("invisible_tile_collision")
+	if (is_on_wall() or is_on_floor() or is_on_ceiling()) and self.get_last_slide_collision().collider != null:
+		
+		if  self.get_last_slide_collision().collider.name == "Invisible_reject" or self.get_last_slide_collision().collider.name == "Reject" :
+			emit_signal("tile_reject")
+			
+		elif self.get_last_slide_collision().collider.name == "Invisible_accpet" or self.get_last_slide_collision().collider.name == "Accept":
+			emit_signal("accept")
 	
 	velocity.y += gravity * delta
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
 	
-	velocity.x = clamp(velocity.x, -speed, speed)
 	
-	if Input.is_action_pressed("right"):
-		velocity.x += speed * delta
-		facing = "right"
-		if is_shooting_laser: $Laser2.change_facing(facing)
-		
-	elif Input.is_action_pressed("left"):
-		velocity.x -= speed * delta
-		facing = "left"
-		if is_shooting_laser: $Laser2.change_facing(facing)
-	else:
-		velocity.x = lerp(velocity.x, 0, 0.2)
+	if not GameData.showing_dialogue :
+	
+		velocity.x = clamp(velocity.x, -speed, speed)
+	
+		if Input.is_action_pressed("right"):
+			velocity.x += speed * delta
+			facing = "right"
+			if is_shooting_laser: $Laser2.change_facing(facing)
+			
+		elif Input.is_action_pressed("left"):
+			velocity.x -= speed * delta
+			facing = "left"
+			if is_shooting_laser: $Laser2.change_facing(facing)
+		else:
+			velocity.x = lerp(velocity.x, 0, 0.2)
 
 
 	# States
@@ -78,14 +87,22 @@ func _physics_process(delta):
 	is_idling = is_on_floor() and not (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_running = is_on_floor() and (Input.is_action_pressed("left") or Input.is_action_pressed("right"))
 	is_grounded = is_on_floor()
-		
+	
+	
+	if GameData.showing_dialogue:
+		is_jumping = false
+		is_double_jumping = false
+		is_jump_cancelled = false
+		is_idling = true
+		is_running = false
+		is_grounded = true	
 	
 	#sounds.................
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		$jump.play()
-		
-	if Input.is_action_just_pressed("jump") and (is_falling or is_jumping)  and not is_on_floor() and charge >= double_jump_charge :
-		$doubleJump.play()
+#	if Input.is_action_just_pressed("jump") and is_on_floor():
+#		$jump.play()
+#
+#	if Input.is_action_just_pressed("jump") and (is_falling or is_jumping)  and not is_on_floor() and charge >= double_jump_charge :
+#		$doubleJump.play()
 		
 	
 	
@@ -93,11 +110,13 @@ func _physics_process(delta):
 	if is_jumping:
 		jumps_made += 1
 		velocity.y = -jump_strength
+		$jump.play()
 		
 	elif is_double_jumping:
 		jumps_made += 1
 		if jumps_made <= maximum_jumps:
 			velocity.y = -double_jump_strength
+			$doubleJump.play()
 			decrease_charge(double_jump_charge)
 			shake_camera(0.2, 15, 20, 0)
 			$Explosion.start_animation()
@@ -106,6 +125,7 @@ func _physics_process(delta):
 		jumps_made = 0
 	
 	#move
+	if GameData.showing_dialogue : velocity.x = 0
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 	
 	animiation()
@@ -125,29 +145,35 @@ func _physics_process(delta):
 		emit_signal("grounded_updated", is_grounded)
 	
 	
-	#Laser
-	if (Input.is_action_just_pressed("ShotTest") or Input.is_action_pressed("ShotTest")) and charge > 200 * laser_charge_rate:
-		shake_camera(0.2, 15, 25, 0)
-		if not is_shooting_laser:
-			$Laser2.shoot_laser(facing) 
-			is_shooting_laser = true
-			shooting_time_start = Time.get_ticks_msec()
 	
-	if Input.is_action_just_released("ShotTest") or not Input.is_action_pressed("ShotTest"):
-		if is_shooting_laser:
-			$Laser2.stop_laser()
-			is_shooting_laser = false
-			deduce_laser_charge()
+	
+	if not GameData.showing_dialogue : 
+	
+		#Laser
+		if (Input.is_action_just_pressed("ShotTest") or Input.is_action_pressed("ShotTest")) and charge > 200 * laser_charge_rate:
+			shake_camera(0.2, 15, 25, 0)
+			if not is_shooting_laser:
+				$Laser2.shoot_laser(facing) 
+				is_shooting_laser = true
+				shooting_time_start = Time.get_ticks_msec()
 		
-	if is_shooting_laser:
-		var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
-		if(shooting_time_elapsed > 100) : deduce_laser_charge()
-		if charge < shooting_time_elapsed * laser_charge_rate:
-			$Laser2.stop_laser()
-			is_shooting_laser = false
-			deduce_laser_charge()
-				
-
+		if Input.is_action_just_released("ShotTest") or not Input.is_action_pressed("ShotTest"):
+			if is_shooting_laser:
+				$Laser2.stop_laser()
+				is_shooting_laser = false
+				deduce_laser_charge()
+			
+		if is_shooting_laser:
+			var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
+			if(shooting_time_elapsed > 100) : deduce_laser_charge()
+			if charge < shooting_time_elapsed * laser_charge_rate:
+				$Laser2.stop_laser()
+				is_shooting_laser = false
+				deduce_laser_charge()
+					
+		
+		if position.y > 5000 : kill()
+		
 func deduce_laser_charge():
 	var shooting_time_elapsed = Time.get_ticks_msec() - shooting_time_start
 	decrease_charge(shooting_time_elapsed * laser_charge_rate)
@@ -168,7 +194,7 @@ func animiation():
 	elif is_idling: $AnimatedSprite.play("Idle")
 		
 
-func kill(wait_time = 2.0):
+func kill(wait_time = 1.0):
 	
 	if not is_alive : return
 	
@@ -184,8 +210,10 @@ func kill(wait_time = 2.0):
 	$IdleCollision.disabled = true
 	$JumpCollision.disabled = true
 	emit_signal("player_died")
+	set_physics_process(false)
+	set_process(false)
 
-	#yield(get_tree().create_timer(wait_time), "timeout")
+	yield(get_tree().create_timer(wait_time), "timeout")
 	queue_free()
 
 func set_charge(value: float):

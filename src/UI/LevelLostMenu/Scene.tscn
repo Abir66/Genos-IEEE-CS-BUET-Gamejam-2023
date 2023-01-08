@@ -24,7 +24,7 @@ anchor_right = 1.0
 margin_top = 60.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 1 )
-text = "Game Over"
+text = "You Lost"
 align = 1
 valign = 1
 
