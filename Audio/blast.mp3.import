@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/blast.mp3-2ead85f9126baef1f29f39ac24a40c32.mp3str"
+
+[deps]
+
+source_file="res://Audio/blast.mp3"
+dest_files=[ "res://.import/blast.mp3-2ead85f9126baef1f29f39ac24a40c32.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

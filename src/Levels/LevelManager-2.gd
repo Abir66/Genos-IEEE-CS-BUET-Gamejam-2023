@@ -4,19 +4,25 @@ var level : Node
 var level_no : int
 
 func _ready():
-	load_level(2)
+	load_level(GameData.level_to_load)
 	
 	
 func load_level(level_no, play_dialogues = true):
+	
+	
 	self.level_no = level_no
 	if is_instance_valid(level) :
 		level.queue_free()
 		$Transition.fade_in()
+		$InGameMenu/Pause.visible = false
+		$InGameMenu/LevelLost.visible = false
 		yield(get_tree().create_timer(0.6), "timeout")
 		$Transition.fade_out()
 	level = load("res://src/Levels/Level" + String(level_no) + "/Scene.tscn").instance()
 	level.position = Vector2.ZERO
 	$LevelContainer.add_child(level)
+	
+
 	
 	# Connect signals
 	level.connect("level_clear", self, "on_level_clear")
@@ -28,7 +34,7 @@ func load_level(level_no, play_dialogues = true):
 	set_charge(level.get_node("Player").get_charge())
 	
 	GameData.level_lost = false
-	$InGameMenu/Pause.visible = false
+	
 	
 	$DialogueManager.set_dialogue(level.dialogues)
 
@@ -51,13 +57,17 @@ func next_level():
 	
 
 func on_level_clear():
+	
 	GameData.level_complete(level_no)
 	next_level()
 
 func on_level_lost():
 	GameData.level_lost = true
 	$InGameMenu/Pause.visible = false
+	
+	yield(get_tree().create_timer(1), "timeout")
 	$InGameMenu/LevelLost.visible = true
+	
 	
 
 # Signals
@@ -75,6 +85,7 @@ func _on_PauseMenuPanel_resume_button():
 
 
 func _on_Menu_restart_button():
+	print("here")
 	get_tree().paused = false
 	$InGameMenu/Pause.visible = false
 	$InGameMenu/LevelLost.visible = false

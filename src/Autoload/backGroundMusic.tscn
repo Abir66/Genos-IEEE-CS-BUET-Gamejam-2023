@@ -3,6 +3,7 @@
 [ext_resource path="res://Audio/background.mp3" type="AudioStream" id=1]
 
 [node name="backGroundMusic" type="AudioStreamPlayer2D"]
+pause_mode = 2
 position = Vector2( 838, 15 )
 stream = ExtResource( 1 )
 volume_db = -31.0

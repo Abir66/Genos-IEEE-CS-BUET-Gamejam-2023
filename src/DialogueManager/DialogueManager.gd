@@ -24,6 +24,7 @@ func start_dialogue():
 	is_running = true
 	_dialogue_label.visible = true
 	_show_dialogue()
+	GameData.showing_dialogue = true
 
 func _show_dialogue():
 	_dialogue_label.show_dialogue(_dialogues[_curr_no])
@@ -36,6 +37,7 @@ func _stop_dialogue():
 	_dialogue_label.visible = false
 	is_running = false
 	emit_signal("dialogue_stop")
+	GameData.showing_dialogue = false
 	
 func _next_dialogue():
 	if _curr_no+1 < _dialogues.size():

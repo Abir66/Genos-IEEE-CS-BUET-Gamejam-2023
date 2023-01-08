@@ -84,6 +84,8 @@ func _physics_process(delta: float) -> void:
 		_velocity.y = move_and_slide(_velocity,FLOOR_NORMAL, false, 0).y
 	else :
 		_velocity.y = move_and_slide(_velocity,FLOOR_NORMAL).y
+		
+	if position.y > 5000 : kill()
 	
 func _process(delta):
 	if right_going: $Laser.set_facing("right")

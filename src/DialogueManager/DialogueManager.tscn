@@ -29,5 +29,15 @@ script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="ColorRect/Dialogue"]
 
+[node name="Label" type="Label" parent="ColorRect/Dialogue"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -25.0
+margin_right = -24.0
+margin_bottom = -6.0
+text = "Press Space for next sentence, Press Tab to skip
+"
+align = 2
+
 [node name="TextToSpeech" type="AudioStreamPlayer" parent="."]
 script = ExtResource( 3 )
