@@ -8,7 +8,7 @@ signal level_lost
 var camera : Camera2D
 var is_player_alive : bool
 
-var dialogues = ["Hello, Genos! This is your trainer program speaking...", "Throughout this training session, you need to follow my instructions, is that clear?",
+var dialogues = ["Hello, Genos! This is your trainer speaking...", "Throughout this training session, you need to follow my instructions, is that clear?",
  "Genos(You) : *confused robot noise*", "Can you see the stairs in front of you?", "Go to the top and wait for next instruction"]
 
 var call_again = true
