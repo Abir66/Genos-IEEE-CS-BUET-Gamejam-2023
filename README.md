@@ -29,5 +29,10 @@
 Level Details
 
 - Level 6
+
   - Dialogue: Tell the player two kill all enemies
   - Win condition: Going to Accepting tiles after killing all enemies :)
+
+- Level 5
+  - Dialogue: Tell the player not to drown
+  - Win condition: Go to right end of water
