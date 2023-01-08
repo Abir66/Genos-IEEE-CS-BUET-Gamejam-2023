@@ -8,11 +8,12 @@ var intervalTime =3
 var shootTime=0.7
 var is_casting := false setget set_is_casting
 var isShot= false 
+var is_enabled = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_physics_process(false)
 	$Line2D.points[1] = $Line2D.points[0]
-	$ShootTimer.start(intervalTime)
+	if get_parent().enable_shooting : $ShootTimer.start(intervalTime)
 	
 
 func set_facing(facing):
