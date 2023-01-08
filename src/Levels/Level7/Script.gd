@@ -17,7 +17,7 @@ var enemyCount = 6
 func _ready():
 	is_player_alive = true
 	camera = $Player/Camera2D
-	$Player.set_charge(40)
+	$Player.set_charge(100)
 	camera.make_current()
 
 
