@@ -21,8 +21,7 @@ func has_next_level():
 	return true
 	
 func set_next_level():
-	if level_to_load == 2 : level_to_load = 1
-	else:  level_to_load += 1 
+	level_to_load += 1 
 	
 func save_data():
 	var file = File.new()

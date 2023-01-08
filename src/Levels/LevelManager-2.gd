@@ -53,6 +53,7 @@ func next_level():
 	if GameData.has_next_level() : 
 		GameData.set_next_level()
 		load_level(GameData.level_to_load)
+	else: get_tree().change_scene("res://src/UI/Credit/Credit.tscn")
 	
 
 func on_level_clear():

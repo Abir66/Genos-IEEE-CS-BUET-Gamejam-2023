@@ -10,7 +10,7 @@ var is_player_alive : bool
 
 var call_again = true
 
-var dialogues = ["Do as you please, charge and kill your fellows....",]
+var dialogues = ["Do as you please, just make sure that you're not running out of charge"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,7 +46,10 @@ func check_win_condition():
 
 
 func check_lose_condition():
-	if  not is_player_alive:
+	if is_player_alive and $Player.charge <= 2:
+		$Player.kill()
+		
+	elif  not is_player_alive:
 		call_again = false
 		emit_signal("level_lost")	
 

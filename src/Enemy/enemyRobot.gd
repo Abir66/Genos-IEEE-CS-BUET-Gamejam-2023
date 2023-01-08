@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-
+class_name Enemy
 export var enable_shooting=true
 export var right_range=400.0
 export var left_range=400.0
