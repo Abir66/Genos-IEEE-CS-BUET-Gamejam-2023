@@ -64,7 +64,7 @@ func on_level_lost():
 	GameData.level_lost = true
 	$InGameMenu/Pause.visible = false
 	
-	#yield(get_tree().create_timer(1), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	$InGameMenu/LevelLost.visible = true
 
 
@@ -108,6 +108,6 @@ func _on_Menu_restart_button_lost():
 	get_tree().paused = false
 	restart_level()
 	
-func show_more_dialogues():
-	$DialogueManager.set_dialogue(level.dialogues)
+func show_more_dialogues(dialogues):
+	$DialogueManager.set_dialogue(dialogues)
 	$DialogueManager.start_dialogue()

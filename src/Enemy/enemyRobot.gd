@@ -44,7 +44,9 @@ func _ready():
 #	set_physics_process(false)
 #	set_process(false)
 	_velocity.x = speed.x
-	$Laser.visible = true
+	if enable_shooting : $Laser.visible = true
+	else : $Laser.visible = false
+		
 	if right_going: $Laser.set_facing("right")
 	else : $Laser.set_facing("left")
 	
