@@ -6,7 +6,7 @@
 pause_mode = 2
 position = Vector2( 838, 15 )
 stream = ExtResource( 1 )
-volume_db = -31.0
+volume_db = -25.0
 pitch_scale = 0.7
 autoplay = true
 max_distance = 30000.0

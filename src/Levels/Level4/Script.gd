@@ -10,7 +10,7 @@ var is_player_alive : bool
 
 var call_again = true
 
-var dialogues = ["Do as you please, just make use that you're not running out of charge"]
+var dialogues = ["Do as you please, charge and kill your fellows....",]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
