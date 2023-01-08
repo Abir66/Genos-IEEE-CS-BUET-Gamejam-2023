@@ -8,8 +8,7 @@ signal level_lost
 var camera : Camera2D
 var is_player_alive : bool
 
-var dialogues = ["Hi, Genos! This is your trainer...", "Throughout this training session, you need to obey my order",
- "For now, go to the top of the staircase and wait for the next order"]
+var dialogues = ["Careful Genos. Water is  bad for your circuits."]
 
 var call_again = true
 # Called when the node enters the scene tree for the first time.

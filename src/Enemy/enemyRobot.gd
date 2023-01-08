@@ -118,3 +118,7 @@ func kill(wait_time = 2.0):
 
 func _on_Timer_timeout():
 	pass # Replace with function body.
+
+
+func _on_Enemy_died():
+	pass # Replace with function body.

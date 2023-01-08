@@ -2,9 +2,9 @@ extends Node2D
 
 const SAVE_FILE = "user://save.dat"
 
-var level_to_load:int = 2
+var level_to_load:int = 1
 var max_level_reached:int = 1
-export var total_levels:int = 10
+export var total_levels:int = 7
 var level_lost = false
 var showing_dialogue = false
 
@@ -12,8 +12,8 @@ func _ready() -> void:
 	load_data()
 
 func level_complete(level_no:int):
-	if level_no > max_level_reached:
-		max_level_reached = level_no
+	if level_no >= max_level_reached:
+		max_level_reached = min(total_levels, level_no+1)
 	save_data()
 	
 func has_next_level():

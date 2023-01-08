@@ -11,6 +11,7 @@ var is_player_alive : bool
 var call_again = true
 
 var dialogues = ["Do as you please, charge and kill your fellows....",]
+var enemyCount = 6
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,7 +43,9 @@ func _on_Player_player_died():
 
 # Caution : Check if player is alive before using $Player
 func check_win_condition():
-	pass
+	if  is_player_alive and enemyCount == 0:
+		call_again = false
+		emit_signal("level_clear")	
 
 
 func check_lose_condition():
@@ -59,3 +62,6 @@ func _on_Player_tile_accept():
 
 func _on_Player_tile_reject():
 	$Player.kill()
+
+func _on_Enemy_died():
+	enemyCount -= 1

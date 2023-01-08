@@ -8,7 +8,7 @@ signal level_lost
 var camera : Camera2D
 var is_player_alive : bool
 
-var dialogues = ["This is a dialogue", "test 1 ", "test 2", "test 3", "4", "5"]
+var dialogues = ["I have had enough......."]
 var enemy_count:int = 0
 var call_again = true
 # Called when the node enters the scene tree for the first time.
