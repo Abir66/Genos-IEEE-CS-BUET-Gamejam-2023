@@ -45,7 +45,7 @@ func check_win_condition():
 
 
 func check_lose_condition():
-	if  not is_player_alive:
+	if not is_player_alive:
 		emit_signal("level_lost")	
 
 

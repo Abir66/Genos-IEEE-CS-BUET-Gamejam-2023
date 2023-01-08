@@ -8,14 +8,13 @@ func _ready():
 	
 	
 func load_level(level_no, play_dialogues = true):
-	
+	$InGameMenu/Pause.visible = false
+	$InGameMenu/LevelLost.visible = false
 	
 	self.level_no = level_no
 	if is_instance_valid(level) :
 		level.queue_free()
 		$Transition.fade_in()
-		$InGameMenu/Pause.visible = false
-		$InGameMenu/LevelLost.visible = false
 		yield(get_tree().create_timer(0.6), "timeout")
 		$Transition.fade_out()
 	level = load("res://src/Levels/Level" + String(level_no) + "/Scene.tscn").instance()
@@ -57,7 +56,7 @@ func next_level():
 	
 
 func on_level_clear():
-	
+	print("Got level clear")
 	GameData.level_complete(level_no)
 	next_level()
 
@@ -65,10 +64,9 @@ func on_level_lost():
 	GameData.level_lost = true
 	$InGameMenu/Pause.visible = false
 	
-	yield(get_tree().create_timer(1), "timeout")
+	#yield(get_tree().create_timer(1), "timeout")
 	$InGameMenu/LevelLost.visible = true
-	
-	
+
 
 # Signals
 func set_health(health_value):
@@ -85,10 +83,9 @@ func _on_PauseMenuPanel_resume_button():
 
 
 func _on_Menu_restart_button():
-	print("here")
-	get_tree().paused = false
 	$InGameMenu/Pause.visible = false
 	$InGameMenu/LevelLost.visible = false
+	get_tree().paused = false
 	restart_level()
 
 
@@ -103,3 +100,14 @@ func _on_Menu_exit_button():
 	$InGameMenu/Pause.visible = false
 	$InGameMenu/LevelLost.visible = false
 	get_tree().change_scene("res://src/Main/Game.tscn")
+
+
+func _on_Menu_restart_button_lost():
+	$InGameMenu/Pause.visible = false
+	$InGameMenu/LevelLost.visible = false
+	get_tree().paused = false
+	restart_level()
+	
+func show_more_dialogues():
+	$DialogueManager.set_dialogue(level.dialogues)
+	$DialogueManager.start_dialogue()
