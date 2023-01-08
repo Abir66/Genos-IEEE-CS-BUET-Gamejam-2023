@@ -46,7 +46,7 @@ func check_win_condition():
 
 
 func check_lose_condition():
-	if is_player_alive and $Player.charge <= 5:
+	if is_player_alive and $Player.charge <= 2:
 		$Player.kill()
 		
 	elif  not is_player_alive:
