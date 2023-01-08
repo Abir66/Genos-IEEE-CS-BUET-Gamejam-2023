@@ -76,7 +76,6 @@ func _physics_process(delta):
 	
 	
 	
-	
 func set_is_casting(cast: bool)->void:
 	is_casting= cast
 	$beamParticle.emitting=is_casting

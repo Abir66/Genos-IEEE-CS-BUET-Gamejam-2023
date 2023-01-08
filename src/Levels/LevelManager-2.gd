@@ -108,6 +108,6 @@ func _on_Menu_restart_button_lost():
 	get_tree().paused = false
 	restart_level()
 	
-func show_more_dialogues():
-	$DialogueManager.set_dialogue(level.dialogues)
+func show_more_dialogues(dialogues):
+	$DialogueManager.set_dialogue(dialogues)
 	$DialogueManager.start_dialogue()

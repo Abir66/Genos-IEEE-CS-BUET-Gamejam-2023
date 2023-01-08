@@ -8,8 +8,10 @@ signal level_lost
 var camera : Camera2D
 var is_player_alive : bool
 
-var dialogues = ["That wasn't supposed to happen.", "Was that instruction too complex?","Okay... Let's try some simple things first.",
-"You are getting low own battery", "Charge yourself.", "Without charge, you cannot double-jump or shoot laser"]
+var dialogues = ["That wasn't supposed to happen.", "Why would you defy me?", "Was that instruction too complex?","Okay... Let's try some simple things first.",
+"You are getting low on battery", "Charge yourself.", "Without charge, you cannot double-jump or shoot laser"]
+
+var dialogue2_shown = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,6 +42,7 @@ func _on_Player_player_died():
 # Caution : Check if player is alive before using $Player
 func check_win_condition():
 	if is_player_alive :
+			
 		if $Player.charge <= 5 :
 			emit_signal("level_clear")
 			

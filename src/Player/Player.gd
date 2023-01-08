@@ -57,7 +57,7 @@ func _physics_process(delta):
 			emit_signal("tile_reject")
 			
 		elif self.get_last_slide_collision().collider.name == "Invisible_accpet" or self.get_last_slide_collision().collider.name == "Accept":
-			emit_signal("accept")
+			emit_signal("tile_accept")
 	
 	velocity.y += gravity * delta
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
