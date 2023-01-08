@@ -8,11 +8,17 @@ In the game you will play as a robot. And you will be given some instructions. M
 
 Then what do you have to do to complete a level? Well you have to figure it out yourself from ghe insructions, surroundings, or by try-and-error
 
-#Controls
+## Controls
+
 Left - A
+
 Right - D
+
 Jump - W or Right click
+
 Double jump - jump again after jumping
+
 Shoot laser - left click
+
 
 To play the game, run the executable in the EXE folder
