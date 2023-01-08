@@ -63,3 +63,7 @@ func _on_Player_tile_accept():
 
 func _on_Player_tile_reject():
 	$Player.kill()
+
+
+func _on_Enemy_enemy_died():
+	$Player.kill()

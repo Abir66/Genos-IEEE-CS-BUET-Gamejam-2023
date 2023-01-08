@@ -1,4 +1,4 @@
 extends Control
 
 func _on_BackButton_pressed() -> void:
-	self.visible = false
+	get_tree().change_scene("res://src/Main/Game.tscn")
