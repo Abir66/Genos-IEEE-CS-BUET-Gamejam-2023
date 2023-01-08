@@ -1,38 +1,18 @@
-# Gamejam-v3.0
+# Genos
 
-### DialogueManager
+This is a puzzle solving platformer game as our submission for the IEEE GameJam 2023.
 
-- Public methods
+The theme was "Its not supposed to do that"
 
-  - set_dialogue(lines:Array[String]) -> void
-  - start_dialogue() -> void
+In the game you will play as a robot. And you will be given some instructions. Matching with the theme you are not supposed to do what you are told?
 
-- Public variables
+Then what do you have to do to complete a level? Well you have to figure it out yourself from ghe insructions, surroundings, or by try-and-error
 
-  - is_running:bool
-  - play_audio:bool
+#Controls
+Left - A
+Right - D
+Jump - W or Right click
+Double jump - jump again after jumping
+Shoot laser - left click
 
-- Signals
-
-  - dialogue_start: Emits when start_dialogue is called
-  - dialogue_stop: Emits when dialogue is finished or skipped
-
-- InputMap
-  - next_dialogue: To show the next dialogue
-  - skip_dialogue: To skip the remaining dialogues
-
-#####to make sound working#####
-
-- need some modification... go to audio folder...you would see import tab to the upper left on your screen,,,
-  make every sound loop off(except laser related) and reimport them
-
-Level Details
-
-- Level 6
-
-  - Dialogue: Tell the player two kill all enemies
-  - Win condition: Going to Accepting tiles after killing all enemies :)
-
-- Level 5
-  - Dialogue: Tell the player not to drown
-  - Win condition: Go to right end of water
+To play the game, run the executable in the EXE folder
