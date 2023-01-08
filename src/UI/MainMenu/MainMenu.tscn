@@ -32,29 +32,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -87.0
-margin_right = 150.0
-margin_bottom = -37.0
+margin_left = -148.0
+margin_top = -66.0
+margin_right = 152.0
+margin_bottom = -16.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Start"
-
-[node name="CreditsButton" type="Button" parent="MainMenuPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -25.0
-margin_right = 150.0
-margin_bottom = 25.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 3 )
-text = "Credits"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ExitButton" type="Button" parent="MainMenuPanel"]
 anchor_left = 0.5
@@ -62,13 +46,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -150.0
-margin_top = 38.0
+margin_top = 11.0
 margin_right = 150.0
-margin_bottom = 88.0
+margin_bottom = 61.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 3 )
 text = "Exit"
 
 [connection signal="pressed" from="MainMenuPanel/StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="pressed" from="MainMenuPanel/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MainMenuPanel/ExitButton" to="." method="_on_ExitButton_pressed"]

@@ -6,6 +6,7 @@ signal set_health(health_value)
 signal player_died
 signal tile_reject
 signal tile_accept
+signal battery_picked
 
 const UP_DIRECTION = Vector2.UP
 
@@ -56,7 +57,7 @@ func _physics_process(delta):
 			emit_signal("tile_reject")
 			
 		elif self.get_last_slide_collision().collider.name == "Invisible_accpet" or self.get_last_slide_collision().collider.name == "Accept":
-			emit_signal("accept")
+			emit_signal("tile_accept")
 	
 	velocity.y += gravity * delta
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
@@ -235,6 +236,7 @@ func get_health() : return health
 func get_charge() : return charge
 func got_battery(charge) : 
 	set_charge(self.charge + charge)
+	emit_signal("battery_picked")
 
 	
 func _on_jump_finished():
